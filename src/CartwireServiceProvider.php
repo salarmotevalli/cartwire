@@ -6,14 +6,14 @@ use Livewire\Livewire;
 use Salarmotevalli\CartWire\Helper\Cart;
 use Salarmotevalli\CartWire\Http\Livewire\NavigationItem;
 
-class CartWireServiceProvider extends ServiceProvider
+class CartwireServiceProvider extends ServiceProvider
 {
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__.'/../config/cartwire.php', 'cartwire');
         App::bind('cart',function() {
             return new Cart();
         });
-        $this->mergeConfigFrom(__DIR__.'/../config/cartwire.php', 'cartwire');
     }
 
 

@@ -1,4 +1,6 @@
 <?php
 return [
-    'hello' => 'yes'
+    'models' => [
+        'users' => \App\Models\User::class
+    ]
 ];
