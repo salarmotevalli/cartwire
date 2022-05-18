@@ -1,0 +1,25 @@
+{
+    "name": "salarmotevalli/cartwire",
+    "description": "this package provid a cart for your laravel-livewire project",
+    "license": "MIT",
+    "keywords": ["laravel", "tailwind", "cart"],
+    "autoload": {
+        "psr-4": {
+            "Salarmotevalli\\CartWire\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Salarmotevalli\\CartWire\\CartWireServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "salar motevalli",
+            "email": "salar.mo.ro@gmail.com"
+        }
+    ],
+    "require": {}
+}
