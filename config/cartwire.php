@@ -9,7 +9,7 @@ return [
     'model' => \App\Models\User::class,
 
 
-    'template' => 'bootstrap', // tailwind, bootstrap
+    'template' => 'tailwind', // tailwind, bootstrap
 
 
     'store' => 'session', // database, cookie, session
