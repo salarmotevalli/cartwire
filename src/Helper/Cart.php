@@ -1,34 +1,36 @@
 <?php
-namespace Salarmotevalli\CartWire\Helper;
 
+namespace Salarmotevalli\CartWire\Helper;
 
 class Cart
 {
+    public mixed $models;
+
     public function __construct()
     {
+        $model = config('cartwire.model');
+        $this->models = new $model;
         if ($this->get() === null)
             $this->set($this->empty());
     }
 
-    public function add(Attribute $attribute)
+    public function add($modelId): bool
     {
+        $model = $this->models->find($modelId);
         $cart = $this->get();
-        $attribute->amount = !empty($attribute->amount) ? $attribute->amount : 1;
-
-        foreach ($cart['products'] as $item) {
-            if ($attribute->id == $item[0]['id']) {
-                if ($item[0]['amount'] < $item[0]['quantity']) {
-                    $cart['products'] = $this->attributeCartIncrement($attribute->id, $cart['products']);
-                    $this->set($cart);
-                    $status = true;
-                    return $status;
-                }
-                $this->set($cart);
-                $status = false;
-                return $status;
-            }
-        }
-        array_push($cart['products'], [$attribute->toArray(), $attribute->product->toArray()]);
+        $model->amount = !empty($model->amount) ? $model->amount : 1;
+//        foreach ($cart['models'] as $item) {
+//            if ($model->id == $item[0]['id']) {
+//                if ($item[0]['amount'] >= $item[0]['quantity']) {
+//                    $this->set($cart);
+//                    return false;
+//                }
+//                $cart['models'] = $this->attributeCartIncrement($model->id, $cart['models']);
+//                $this->set($cart);
+//                return true;
+//            }
+//        }s
+        array_push($cart['models'], $model->toArray());
         $this->set($cart);
         return true;
     }
@@ -38,9 +40,9 @@ class Cart
         $cart = $this->get();
         if ($attribute->quantity < $value) {
             session()->flash('error', "این تعداد از {$attribute->product->name} در انبار موجود نمیباشد");
-            return  redirect(route('Cart'));
+            return redirect(route('Cart'));
         }
-        $cart['products'] = $this->attributeCartUpdate($attribute->id, $cart['products'], $value);
+        $cart['models'] = $this->attributeCartUpdate($attribute->id, $cart['models'], $value);
         $this->set($cart);
         return;
     }
@@ -48,7 +50,7 @@ class Cart
     public function remove(int $attributeId): void
     {
         $cart = $this->get();
-        array_splice($cart['products'], array_search($attributeId, array_column($cart['products'], 'id')), 1);
+        array_splice($cart['models'], array_search($attributeId, array_column($cart['models'], 'id')), 1);
         $this->set($cart);
     }
 
@@ -60,7 +62,7 @@ class Cart
     public function empty(): array
     {
         return [
-            'products' => [],
+            'models' => [],
         ];
     }
 
@@ -102,11 +104,11 @@ class Cart
         $price = 0;
         $r = $this->get();
 
-        foreach ($r['products'] as $item) {
+        foreach ($r['models'] as $item) {
             if (isset($item[1]['offer'])) {
-                $price +=  $item[1]['offer'] * $item[0]['amount'];
+                $price += $item[1]['offer'] * $item[0]['amount'];
             } else {
-                $price +=  $item[1]['price'] * $item[0]['amount'];
+                $price += $item[1]['price'] * $item[0]['amount'];
             }
         }
         return $price;

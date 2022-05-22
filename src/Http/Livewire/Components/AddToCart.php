@@ -6,14 +6,14 @@ use Salarmotevalli\CartWire\Facades\Cart;
 
 class AddToCart extends \Livewire\Component
 {
-    public $userId;
+    public int $userId;
+
     public function add()
     {
-        $model= config('cartwire.model');
-        dd($this->userId);
-        if(Cart::add($model::find($id)))
-        {
-
+        Cart::add($this->userId);
+//        $model = config('cartwire.model');
+//        if(Cart::add($model::find($this->userId)))
+//        {
 //            $this->emit('productAdded');
 //            $this->dispatchBrowserEvent('notice', [
 //                'type'=> 'success',
@@ -21,17 +21,20 @@ class AddToCart extends \Livewire\Component
 //                'text'=> 'محصول با موفقیت به سبد خرید اضافه شد'
 //            ]);
 //            return;
-        };
+//        };
 //        $this->dispatchBrowserEvent('notice', [
 //            'type'=> 'warning',
 //            'title'=> 'موجودیت',
 //            'text'=> 'این تعداد از محصول در انبار موجود نمی‌باشد'
 //        ]);
-        dd(Cart::get());
+//        Cart::clear();
+//        dd(Cart::get());
     }
 
     public function render()
     {
+//        Cart::clear();
+        dd(Cart::get());
         return view('Cart::components.add-to-cart');
     }
 }
