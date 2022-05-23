@@ -1,5 +1,5 @@
 <?php
-namespace Salarmotevalli\CartWire\Http\Livewire;
+namespace Salarmotevalli\CartWire\Http\Livewire\Components;
 use Livewire\Component;
 use Salarmotevalli\CartWire\Facades\Cart;
 

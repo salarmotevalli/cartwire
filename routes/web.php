@@ -13,6 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/r', function () {
-    return 'hello';
-})->name('cart.list');
+Route::get('/r', \Salarmotevalli\CartWire\Http\Livewire\CartPage::class)->name('cart.list');

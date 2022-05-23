@@ -1,6 +1,6 @@
 <?php
 
-namespace Salarmotevalli\CartWire\Http\Livewire;
+namespace Salarmotevalli\CartWire\Http\Livewire\Components;
 
 use Salarmotevalli\CartWire\Facades\Cart;
 
@@ -12,7 +12,7 @@ class AddToCart extends \Livewire\Component
     {
         Cart::add($this->userId);
 //        $model = config('cartwire.model');
-//        if(Cart::add($model::find($this->userId)))
+//        if(CartPage::add($model::find($this->userId)))
 //        {
 //            $this->emit('productAdded');
 //            $this->dispatchBrowserEvent('notice', [
@@ -27,14 +27,12 @@ class AddToCart extends \Livewire\Component
 //            'title'=> 'موجودیت',
 //            'text'=> 'این تعداد از محصول در انبار موجود نمی‌باشد'
 //        ]);
-//        Cart::clear();
-//        dd(Cart::get());
+//        CartPage::clear();
+//        dd(CartPage::get());
     }
 
     public function render()
     {
-//        Cart::clear();
-        dd(Cart::get());
         return view('Cart::components.add-to-cart');
     }
 }

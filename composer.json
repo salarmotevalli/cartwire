@@ -8,13 +8,6 @@
             "Salarmotevalli\\CartWire\\": "src/"
         }
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-              "CartwireServiceProvider"
-            ]
-        }
-    },
     "authors": [
         {
             "name": "salar motevalli",

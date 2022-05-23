@@ -40,7 +40,7 @@ class Cart
         $cart = $this->get();
         if ($attribute->quantity < $value) {
             session()->flash('error', "این تعداد از {$attribute->product->name} در انبار موجود نمیباشد");
-            return redirect(route('Cart'));
+            return redirect(route('CartPage'));
         }
         $cart['models'] = $this->attributeCartUpdate($attribute->id, $cart['models'], $value);
         $this->set($cart);
@@ -68,7 +68,11 @@ class Cart
 
     public function get(): ?array
     {
-        return request()->session()->get('cart');
+        return array(
+            'models' => [
+                'salar'
+            ] ,
+        );
     }
 
     private function set($cart): void
