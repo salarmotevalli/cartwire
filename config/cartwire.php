@@ -14,6 +14,8 @@ return [
 
     'store' => 'session', // database, cookie, session
 
-
+    'table' => [
+        'id', 'username', 'created_at'
+    ]
 
 ];

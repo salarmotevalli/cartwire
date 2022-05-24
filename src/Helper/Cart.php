@@ -68,11 +68,7 @@ class Cart
 
     public function get(): ?array
     {
-        return array(
-            'models' => [
-                'salar'
-            ] ,
-        );
+        return request()->session()->get('cart');
     }
 
     private function set($cart): void
