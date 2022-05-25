@@ -8,6 +8,14 @@
             "Salarmotevalli\\CartWire\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Salarmotevalli\\CartWire\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
     "authors": [
         {
             "name": "salar motevalli",
