@@ -6,9 +6,7 @@ use Salarmotevalli\CartWire\Facades\Cart;
 class NavigationItem extends Component
 {
     protected $listeners = [
-        'productAdded' => 'updateCartTotal',
-        'productRemoved' => 'updateCartTotal',
-        'clearCart' => 'updateCartTotal'
+        'itemChanged' => 'updateCartTotal',
     ];
 
     public function updateCartTotal(): void

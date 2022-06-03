@@ -6,12 +6,12 @@ use Salarmotevalli\CartWire\Facades\Cart;
 
 class AddToCart extends \Livewire\Component
 {
-    public int $userId;
+    public int $item_id;
 
     public function add()
     {
-        Cart::add($this->userId);
-        $this->emit('productAdded');
+        Cart::add($this->item_id);
+        $this->emit('itemChanged');
 //        $model = config('cartwire.model');
 //        if(CartPage::add($model::find($this->userId)))
 //        {

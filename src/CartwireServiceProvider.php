@@ -8,6 +8,7 @@ use Livewire\Livewire;
 use Salarmotevalli\CartWire\Helper\Cart;
 use Salarmotevalli\CartWire\Http\Livewire\CartPage;
 use Salarmotevalli\CartWire\Http\Livewire\Components\AddToCart;
+use Salarmotevalli\CartWire\Http\Livewire\Components\DeleteCartItem;
 use Salarmotevalli\CartWire\Http\Livewire\Components\NavigationItem;
 
 class CartwireServiceProvider extends ServiceProvider

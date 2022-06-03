@@ -37,10 +37,10 @@ class Cart
         return;
     }
 
-    public function remove(int $attributeId): void
+    public function remove(int $itemId): void
     {
         $cart = $this->get();
-        array_splice($cart['models'], array_search($attributeId, array_column($cart['models'], 'id')), 1);
+        array_splice($cart['models'], array_search($itemId, array_column($cart['models'], 'id')), 1);
         $this->set($cart);
     }
 

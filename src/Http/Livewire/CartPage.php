@@ -8,13 +8,31 @@ use Salarmotevalli\CartWire\Facades\Cart;
 
 class CartPage extends Component
 {
+    public array $items;
+    public array $columns;
+
+    public function deleteItem($id):void
+    {
+        Cart::remove($id);
+        $this->emit('itemChanged');
+    }
+
+    public function mount()
+    {
+        $this->items= Cart::get()['models'];
+        $this->columns= config('cartwire.table');
+    }
+
     public function render()
     {
+        return view('Cart::cartpage');
+    }
+    protected $listeners = [
+        'itemChanged' => 'updateCartTotal',
+    ];
 
-        return view('Cart::cartpage', [
-                'items' => Cart::get()['models'],
-                'columns' => config('cartwire.table')
-            ]
-        );
+    public function updateCartTotal(): void
+    {
+        $this->items= Cart::get()['models'];
     }
 }

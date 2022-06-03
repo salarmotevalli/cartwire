@@ -4,18 +4,27 @@
         <section class="p-2 rounded-4 card-body table-responsive mb-5 mb-lg-0">
             <table class="table table-striped ">
                 <thead>
-                    <tr>
-                        @foreach ($columns as $coloumn)
-                        <td>{{$coloumn}}</td>
-                        @endforeach
-                    </tr>
+                <tr>
+                    @foreach ($columns as $column)
+                        <td>{{$column}}</td>
+                    @endforeach
+                    <td>amount</td>
+                    <td class="text-danger">delete</td>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach ($items as $item)
+                @foreach ($items as $item)
                     <tr class="mb-3">
+                        @foreach($columns as $column)
+                            <td>{{$item[$column]}}</td>
+                        @endforeach
                         <td>{{$item['amount']}}</td>
+                        <td>
+                            <button class="btn btn-danger" wire:click="deleteItem({{$item['id']}})">x
+                            </button>
+                        </td>
                     </tr>
-                    @endforeach
+                @endforeach
                 </tbody>
             </table>
         </section>
