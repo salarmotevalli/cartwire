@@ -11,6 +11,7 @@ class AddToCart extends \Livewire\Component
     public function add()
     {
         Cart::add($this->userId);
+        $this->emit('productAdded');
 //        $model = config('cartwire.model');
 //        if(CartPage::add($model::find($this->userId)))
 //        {
