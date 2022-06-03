@@ -14,22 +14,29 @@ class Cart
             $this->set($this->empty());
     }
 
-    public function add($modelId): bool
+    public function add(int $modelId): bool
     {
         $model = $this->models->find($modelId);
         $cart = $this->get();
+        $index = array_search($modelId, array_column($cart['models'], 'id'));
+
+        if (is_int($index)) {
+            $cart['models'][$index]['amount']++;
+            $this->set($cart);                   
+            return true;
+        }
         $model->amount = !empty($model->amount) ? $model->amount : 1;
-//        foreach ($cart['models'] as $item) {
-//            if ($model->id == $item[0]['id']) {
-//                if ($item[0]['amount'] >= $item[0]['quantity']) {
-//                    $this->set($cart);
-//                    return false;
-//                }
-//                $cart['models'] = $this->attributeCartIncrement($model->id, $cart['models']);
-//                $this->set($cart);
-//                return true;
-//            }
-//        }s
+        //        foreach ($cart['models'] as $item) {
+        //            if ($model->id == $item[0]['id']) {
+        //                if ($item[0]['amount'] >= $item[0]['quantity']) {
+        //                    $this->set($cart);
+        //                    return false;
+        //                }
+        //                $cart['models'] = $this->attributeCartIncrement($model->id, $cart['models']);
+        //                $this->set($cart);
+        //                return true;
+        //            }
+        //        }
         array_push($cart['models'], $model->toArray());
         $this->set($cart);
         return true;
@@ -59,7 +66,7 @@ class Cart
         $this->set($this->empty());
     }
 
-    public function empty(): array
+    private function empty(): array
     {
         return [
             'models' => [],
@@ -71,12 +78,12 @@ class Cart
         return request()->session()->get('cart');
     }
 
-    private function set($cart): void
+    private function set($cart)
     {
         request()->session()->put('cart', $cart);
     }
 
-    private function attributeCartIncrement($attributeId, $cartItems)
+    private function attributeCartIncrement($attributeId, $cartItems): array
     {
         $amount = 1;
         $cartItems = array_map(function ($item) use ($attributeId, $amount) {
@@ -88,7 +95,7 @@ class Cart
         return $cartItems;
     }
 
-    private function attributeCartUpdate($attributeId, $cartItems, $value)
+    private function attributeCartUpdate($attributeId, $cartItems, $value): array
     {
         $cartItems = array_map(function ($item) use ($attributeId, $value) {
             if ($attributeId == $item[0]['id']) {
@@ -99,7 +106,7 @@ class Cart
         return $cartItems;
     }
 
-    public function orderPrice()
+    public function orderPrice(): int
     {
         $price = 0;
         $r = $this->get();
@@ -119,4 +126,3 @@ class Cart
         return $this->orderPrice() + 18000;
     }
 }
-

@@ -5,7 +5,7 @@
             <table class="table table-striped ">
                 <thead>
                 <tr>
-                    @foreach ($coloumns as $coloumn)
+                    @foreach ($columns as $coloumn)
                         <td>{{$coloumn}}</td>
                     @endforeach
                 </tr>
@@ -13,9 +13,7 @@
                 <tbody>
                 @foreach ($items as $item)
                     <tr class="mb-3">
-                        @foreach ($coloumns as $coloumn)
-                            <td>{{$item[$coloumn]}}</td>
-                        @endforeach
+
                     </tr>
                 @endforeach
                 </tbody>
