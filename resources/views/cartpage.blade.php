@@ -4,18 +4,18 @@
         <section class="p-2 rounded-4 card-body table-responsive mb-5 mb-lg-0">
             <table class="table table-striped ">
                 <thead>
-                <tr>
-                    @foreach ($columns as $coloumn)
+                    <tr>
+                        @foreach ($columns as $coloumn)
                         <td>{{$coloumn}}</td>
-                    @endforeach
-                </tr>
+                        @endforeach
+                    </tr>
                 </thead>
                 <tbody>
-                @foreach ($items as $item)
+                    @foreach ($items as $item)
                     <tr class="mb-3">
-
+                        <td>{{$item['amount']}}</td>
                     </tr>
-                @endforeach
+                    @endforeach
                 </tbody>
             </table>
         </section>
@@ -49,4 +49,3 @@
 
     </div>
 </div>
-

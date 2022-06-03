@@ -14,32 +14,15 @@ class Cart
             $this->set($this->empty());
     }
 
-    public function add(int $modelId): bool
+    public function add(int $modelId): bool //handle the adding item to cart
     {
         $model = $this->models->find($modelId);
         $cart = $this->get();
         $index = array_search($modelId, array_column($cart['models'], 'id'));
-
         if (is_int($index)) {
-            $cart['models'][$index]['amount']++;
-            $this->set($cart);                   
-            return true;
+            return $this->amountIncrement($cart, $index);
         }
-        $model->amount = !empty($model->amount) ? $model->amount : 1;
-        //        foreach ($cart['models'] as $item) {
-        //            if ($model->id == $item[0]['id']) {
-        //                if ($item[0]['amount'] >= $item[0]['quantity']) {
-        //                    $this->set($cart);
-        //                    return false;
-        //                }
-        //                $cart['models'] = $this->attributeCartIncrement($model->id, $cart['models']);
-        //                $this->set($cart);
-        //                return true;
-        //            }
-        //        }
-        array_push($cart['models'], $model->toArray());
-        $this->set($cart);
-        return true;
+        return $this->addFirstToCart($cart, $model);
     }
 
     public function updateamount($attribute, $value)
@@ -78,21 +61,24 @@ class Cart
         return request()->session()->get('cart');
     }
 
-    private function set($cart)
+    private function set($cart): void
     {
         request()->session()->put('cart', $cart);
     }
 
-    private function attributeCartIncrement($attributeId, $cartItems): array
+    private function amountIncrement($cart, $index): bool
     {
-        $amount = 1;
-        $cartItems = array_map(function ($item) use ($attributeId, $amount) {
-            if ($attributeId == $item[0]['id']) {
-                $item[0]['amount'] += $amount;
-            }
-            return $item;
-        }, $cartItems);
-        return $cartItems;
+        $cart['models'][$index]['amount']++;
+        $this->set($cart);
+        return true;
+    }
+
+    private function addFirstToCart($cart, $model): bool
+    {
+        $model->amount = 1;
+        $cart['models'][] = $model->toArray();
+        $this->set($cart);
+        return true;
     }
 
     private function attributeCartUpdate($attributeId, $cartItems, $value): array
