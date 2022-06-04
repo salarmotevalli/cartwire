@@ -18,7 +18,9 @@
                         @foreach($columns as $column)
                             <td>{{$item[$column]}}</td>
                         @endforeach
-                        <td>{{$item['amount']}}</td>
+                        <td>
+                            @livewire('UpdateAmount', ['amount' => $item['amount'], 'itemId' => $item['id']])
+                        </td>
                         <td>
                             <button class="btn btn-danger" wire:click="deleteItem({{$item['id']}})">x
                             </button>

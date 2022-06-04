@@ -25,16 +25,12 @@ class Cart
         return $this->addFirstToCart($cart, $model);
     }
 
-    public function updateamount($attribute, $value)
+    public function updateAmount($itemId, $amount)
     {
         $cart = $this->get();
-        if ($attribute->quantity < $value) {
-            session()->flash('error', "این تعداد از {$attribute->product->name} در انبار موجود نمیباشد");
-            return redirect(route('CartPage'));
-        }
-        $cart['models'] = $this->attributeCartUpdate($attribute->id, $cart['models'], $value);
+        $index = array_search($itemId, array_column($cart['models'], 'id'));
+        $cart['models'][$index]['amount'] = $amount;
         $this->set($cart);
-        return;
     }
 
     public function remove(int $itemId): void
@@ -79,17 +75,6 @@ class Cart
         $cart['models'][] = $model->toArray();
         $this->set($cart);
         return true;
-    }
-
-    private function attributeCartUpdate($attributeId, $cartItems, $value): array
-    {
-        $cartItems = array_map(function ($item) use ($attributeId, $value) {
-            if ($attributeId == $item[0]['id']) {
-                $item[0]['amount'] = $value;
-            }
-            return $item;
-        }, $cartItems);
-        return $cartItems;
     }
 
     public function orderPrice(): int
