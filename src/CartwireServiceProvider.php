@@ -8,7 +8,7 @@ use Livewire\Livewire;
 use Salarmotevalli\CartWire\Helper\Cart;
 use Salarmotevalli\CartWire\Http\Livewire\CartPage;
 use Salarmotevalli\CartWire\Http\Livewire\Components\AddToCart;
-use Salarmotevalli\CartWire\Http\Livewire\Components\DeleteCartItem;
+use Salarmotevalli\CartWire\Http\Livewire\Components\DeleteItem;
 use Salarmotevalli\CartWire\Http\Livewire\Components\NavigationItem;
 use Salarmotevalli\CartWire\Http\Livewire\Components\UpdateAmount;
 
@@ -29,6 +29,7 @@ class CartwireServiceProvider extends ServiceProvider
         Livewire::component('AddToCart', AddToCart::class);
         Livewire::component('CartPage', CartPage::class);
         Livewire::component('UpdateAmount', UpdateAmount::class);
+        Livewire::component('DeleteItem', DeleteItem::class);
     }
 
 

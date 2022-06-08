@@ -22,8 +22,7 @@
                             @livewire('UpdateAmount', ['amount' => $item['amount'], 'itemId' => $item['id']])
                         </td>
                         <td>
-                            <button class="btn btn-danger" wire:click="deleteItem({{$item['id']}})">x
-                            </button>
+                           @livewire('DeleteItem', ['itemId' => $item['id']])
                         </td>
                     </tr>
                 @endforeach
@@ -32,7 +31,6 @@
         </section>
 
         <section class="p-3 bg-info rounded-4">
-
             <div class="text-white mb-4">
                 <small class="text-secondary h5 text-md">total:</small>
                 <div class="border-bottom"></div>

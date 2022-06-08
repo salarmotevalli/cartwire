@@ -11,12 +11,6 @@ class CartPage extends Component
     public array $items;
     public array $columns;
 
-    public function deleteItem($id):void
-    {
-        Cart::remove($id);
-        $this->emit('itemChanged');
-    }
-
     public function mount()
     {
         $this->items= Cart::get()['models'];
@@ -33,6 +27,7 @@ class CartPage extends Component
 
     public function updateCartTotal(): void
     {
-        $this->items= Cart::get()['models'];
+        $this->mount();
+        $this->render();
     }
 }
