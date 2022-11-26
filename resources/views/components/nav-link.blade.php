@@ -1,1 +1,1 @@
-<a class="nav-link" href="{{ route('cart.list') }}">Cart({{$count}})</a>
+<a class="nav-link d-inline" href="{{ route('cart.list') }}">Cart({{$count}})</a>

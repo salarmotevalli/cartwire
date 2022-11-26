@@ -2,7 +2,6 @@
 
 namespace Salarmotevalli\CartWire\Http\Livewire;
 
-use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Salarmotevalli\CartWire\Facades\Cart;
 

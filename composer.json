@@ -22,5 +22,15 @@
             "email": "salar.mo.ro@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "livewire/livewire": "^2.0"
+    },
+    "extra": {
+        "laravel" : {
+            "providers" : [
+                "Salarmotevalli\\CartWirear\\CartwireServiceProvider",
+                "Salarmotevalli\\CartWirear\\CartwireRouteServiceProvider"
+            ]
+        }
+    }
 }
