@@ -28,8 +28,7 @@ class CartwireServiceProvider extends ServiceProvider
         Livewire::component('NavigationItem', NavigationItem::class);
         Livewire::component('AddToCart', AddToCart::class);
         Livewire::component('CartPage', CartPage::class);
-        Livewire::component('UpdateAmount', UpdateAmount::class);
-        Livewire::component('DeleteItem', DeleteItem::class);
+        Livewire::component('update-amount', UpdateAmount::class);
     }
 
 

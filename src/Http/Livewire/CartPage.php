@@ -12,7 +12,7 @@ class CartPage extends Component
 
     public function mount()
     {
-        $this->items= Cart::get()['models'];
+        $this->getCart();
         $this->columns= config('cartwire.table');
     }
 
@@ -20,13 +20,23 @@ class CartPage extends Component
     {
         return view('Cart::cartpage');
     }
-    protected $listeners = [
-        'itemChanged' => 'updateCartTotal',
-    ];
-
-    public function updateCartTotal(): void
+    
+    public function getCart(): void
     {
+        $this->items = Cart::get()['models'];
+    }
+
+    public function clearCart()
+    {
+        Cart::clear();
         $this->mount();
-        $this->render();
+    }
+
+    public function deleteItem(int $item_id):void
+    {
+        Cart::remove($item_id);
+        // $this->emitUp('itemChanged');
+        // $this->emitUp('refreshProducts');
+        $this->mount();
     }
 }

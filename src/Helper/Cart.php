@@ -9,14 +9,14 @@ class Cart
     public function __construct()
     {
         $model = config('cartwire.model');
-        $this->models = new $model;
+        $this->models = $model;
         if ($this->get() === null)
             $this->set($this->empty());
     }
 
     public function add(int $modelId): bool //handle the adding item to cart
     {
-        $model = $this->models->find($modelId);
+        $model = $this->models::find($modelId);
         $cart = $this->get();
         $index = array_search($modelId, array_column($cart['models'], 'id'));
         if (is_int($index)) {
@@ -25,18 +25,18 @@ class Cart
         return $this->addFirstToCart($cart, $model);
     }
 
-    public function updateAmount($itemId, $amount)
+    public function updateAmount($item_id, $amount)
     {
         $cart = $this->get();
-        $index = array_search($itemId, array_column($cart['models'], 'id'));
+        $index = array_search($item_id, array_column($cart['models'], 'id'));
         $cart['models'][$index]['amount'] = $amount;
         $this->set($cart);
     }
 
-    public function remove(int $itemId): void
+    public function remove(int $item_id): void
     {
         $cart = $this->get();
-        array_splice($cart['models'], array_search($itemId, array_column($cart['models'], 'id')), 1);
+        array_splice($cart['models'], array_search($item_id, array_column($cart['models'], 'id')), 1);
         $this->set($cart);
     }
 

@@ -1,31 +1,25 @@
 <div class="container mt-5">
     <div class="d-lg-flex p-3 bg-white justify-content-lg-between shadow rounded-4 text-start mb-5">
-
         <section class="p-2 rounded-4 card-body table-responsive mb-5 mb-lg-0">
             <table class="table table-striped ">
                 <thead>
-                <tr>
-                    @foreach ($columns as $column)
-                        <td>{{$column}}</td>
-                    @endforeach
-                    <td>amount</td>
-                    <td class="text-danger">delete</td>
-                </tr>
+                    <tr>
+                        @foreach ($columns as $column)
+                            <td>{{ $column }}</td>
+                        @endforeach
+                        <td>amount</td>
+                        <td class="text-danger">delete</td>
+                    </tr>
                 </thead>
                 <tbody>
-                @foreach ($items as $item)
-                    <tr class="mb-3">
-                        @foreach($columns as $column)
-                            <td>{{$item[$column]}}</td>
-                        @endforeach
-                        <td>
-                            @livewire('UpdateAmount', ['amount' => $item['amount'], 'itemId' => $item['id']])
-                        </td>
-                        <td>
-                           @livewire('DeleteItem', ['itemId' => $item['id']])
-                        </td>
-                    </tr>
-                @endforeach
+                    @foreach ($items as $item)
+                        <tr class="mb-3">
+                            @foreach ($columns as $column)
+                                <td>{{ $item[$column] }}</td>
+                            @endforeach
+                            @livewire('update-amount', ['item_amount' => $item['amount'], 'item_id' => $item['id']], key('item-' . $item['id']))
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </section>
@@ -52,6 +46,11 @@
             <div>
                 <button class="btn btn-secondary">
                     pay order
+                </button>
+            </div>
+            <div>
+                <button wire:click="clearCart" class="btn btn-secondary">
+                    clear
                 </button>
             </div>
         </section>

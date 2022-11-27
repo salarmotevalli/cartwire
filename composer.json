@@ -28,8 +28,8 @@
     "extra": {
         "laravel" : {
             "providers" : [
-                "Salarmotevalli\\CartWirear\\CartwireServiceProvider",
-                "Salarmotevalli\\CartWirear\\CartwireRouteServiceProvider"
+                "Salarmotevalli\\CartWire\\CartwireServiceProvider",
+                "Salarmotevalli\\CartWire\\CartwireRouteServiceProvider"
             ]
         }
     }

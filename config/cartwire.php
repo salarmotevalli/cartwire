@@ -4,7 +4,7 @@ return [
     /*
      * with this item you can specific which one of models can be on the cart
      */
-
+    'cart-page-route' => 'cart',
 
     'model' => \App\Models\User::class,
 
@@ -25,5 +25,6 @@ return [
 
     'notification' => true,
 
+    'nav-item-name' => 'Cart',
 
 ];
