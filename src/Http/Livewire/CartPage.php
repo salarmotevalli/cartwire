@@ -8,6 +8,7 @@ use Salarmotevalli\CartWire\Facades\Cart;
 class CartPage extends Component
 {
     public array $items;
+
     public array $columns;
 
     public function mount()
@@ -29,14 +30,6 @@ class CartPage extends Component
     public function clearCart()
     {
         Cart::clear();
-        $this->mount();
-    }
-
-    public function deleteItem(int $item_id):void
-    {
-        Cart::remove($item_id);
-        // $this->emitUp('itemChanged');
-        // $this->emitUp('refreshProducts');
         $this->mount();
     }
 }

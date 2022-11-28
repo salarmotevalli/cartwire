@@ -7,8 +7,11 @@
                         @foreach ($columns as $column)
                             <td>{{ $column }}</td>
                         @endforeach
-                        <td>amount</td>
-                        <td class="text-danger">delete</td>
+                        <td>
+                            <span>amount</span> /
+                            <span class="text-danger">delete</span> 
+
+                        </td>
                     </tr>
                 </thead>
                 <tbody>
@@ -17,7 +20,8 @@
                             @foreach ($columns as $column)
                                 <td>{{ $item[$column] }}</td>
                             @endforeach
-                            @livewire('update-amount', ['item_amount' => $item['amount'], 'item_id' => $item['id']], key('item-' . $item['id']))
+                            <livewire:change-amount :item_amount="$item['amount']" :item_id="$item['id']" :wire:key="$item['id']">
+
                         </tr>
                     @endforeach
                 </tbody>
@@ -44,8 +48,6 @@
             </div>
 
             <div>
-                <button class="btn btn-secondary">
-                    pay order
                 </button>
             </div>
             <div>
