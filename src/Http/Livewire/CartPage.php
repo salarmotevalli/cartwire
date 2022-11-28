@@ -8,7 +8,6 @@ use Salarmotevalli\CartWire\Facades\Cart;
 class CartPage extends Component
 {
     public array $items;
-
     public array $columns;
 
     public function mount()
@@ -17,9 +16,9 @@ class CartPage extends Component
         $this->columns= config('cartwire.table');
     }
 
-    public function render()
+    protected function getListeners()
     {
-        return view('Cart::cartpage');
+        return ['item_deleted' => 'getCart'];
     }
     
     public function getCart(): void
@@ -31,5 +30,10 @@ class CartPage extends Component
     {
         Cart::clear();
         $this->mount();
+    }
+
+    public function render()
+    {
+        return view('Cart::cartpage');
     }
 }
