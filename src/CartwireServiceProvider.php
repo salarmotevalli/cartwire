@@ -5,6 +5,7 @@ namespace Salarmotevalli\CartWire;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use Salarmotevalli\CartWire\Console\InstallCommand;
 use Salarmotevalli\CartWire\Helper\Cart;
 use Salarmotevalli\CartWire\Http\Livewire\CartPage;
 use Salarmotevalli\CartWire\Http\Livewire\Components\AddToCart;
@@ -20,6 +21,8 @@ class CartwireServiceProvider extends ServiceProvider
         App::bind('cart', function () {
             return new Cart();
         });
+
+        $this->registerCommands();
     }
 
     public function boot()
@@ -32,5 +35,11 @@ class CartwireServiceProvider extends ServiceProvider
         Livewire::component('change-amount', ChangeAmount::class);
     }
 
+    private function registerCommands() {
+        $commands = [
+            InstallCommand::class,
+        ];
 
+        $this->commands($commands);
+    }
 }
