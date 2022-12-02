@@ -34,6 +34,9 @@ class InstallCommand extends Command
         } elseif ($this->argument('ui') === 'tailwind') {
             // $this->installInertiaStack();
         }
+
+        $this->publishes();
+
     }
 
 
@@ -41,19 +44,23 @@ class InstallCommand extends Command
 
     private function installbootstrapUi()
     {
-
         $viewPath = '/../../resources/views';
-        $bootstrapStubsPath = '/../../stubs/bootstrap';
+        $bootstrapStubsPath = '/../../stubs/views/bootstrap';
 
         $array = [
-            __DIR__ . $bootstrapStubsPath . 'cartpage.blade.php' => $viewPath . 'cartpage.blade.php',
-            __DIR__ . $bootstrapStubsPath . 'components/add-to-cart.blade.php' => $viewPath . 'components/add-to-cart.blade.php',
-            __DIR__ . $bootstrapStubsPath . 'components/change-amount.blade.php' => $viewPath . 'components/change-amount.blade.php',
-            __DIR__ . $bootstrapStubsPath . 'components/nav-link.blade.php' => $viewPath . 'components/nav-linke.blade.php',
+            __DIR__ . $bootstrapStubsPath . '/cartpage.blade.php' => __DIR__ . $viewPath . '/cartpage.blade.php',
+            __DIR__ . $bootstrapStubsPath . '/components/add-to-cart.blade.php' => __DIR__ . $viewPath . '/components/add-to-cart.blade.php',
+            __DIR__ . $bootstrapStubsPath . '/components/change-amount.blade.php' => __DIR__ . $viewPath . '/components/change-amount.blade.php',
+            __DIR__ . $bootstrapStubsPath . '/components/nav-link.blade.php' => __DIR__ . $viewPath . '/components/nav-linke.blade.php',
         ];
 
         foreach ($array as $from => $to) {
             copy($from, $to);
         }
+    }
+
+    private function publishes() {
+        $this->callSilent('vendor:publish', ['--tag' => 'cartwire-config', '--force' => true]);
+        $this->callSilent('vendor:publish', ['--tag' => 'cartwire-views', '--force' => true]);
     }
 }

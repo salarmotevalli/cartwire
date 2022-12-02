@@ -34,6 +34,6 @@ class CartPage extends Component
 
     public function render()
     {
-        return view('Cart::cartpage');
+        return view('cartwire::cartpage');
     }
 }

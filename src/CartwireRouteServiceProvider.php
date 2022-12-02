@@ -13,7 +13,7 @@ class CartwireRouteServiceProvider extends RouteServiceProvider
             Route::middleware('web')
                 ->group(__DIR__.'/../routes/web.php');
         });
-        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
     }
 }

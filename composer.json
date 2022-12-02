@@ -1,6 +1,6 @@
 {
     "name": "salarmotevalli/cartwire",
-    "description": "This package provide a cart for your laravel-livewire project",
+    "description": "This package provide a cart for your laravel-livewire projects",
     "license": "MIT",
     "keywords": ["laravel", "tailwind", "cart"],
     "autoload": {

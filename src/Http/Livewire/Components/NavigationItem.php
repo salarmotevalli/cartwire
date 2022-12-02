@@ -23,6 +23,6 @@ class NavigationItem extends Component
 
     public function render()
     {
-        return view('Cart::components.nav-link');
+        return view('cartwire::components.nav-link');
     }
 }

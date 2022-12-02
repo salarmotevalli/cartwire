@@ -17,6 +17,6 @@ class AddToCart extends \Livewire\Component
 
     public function render()
     {
-        return view('Cart::components.add-to-cart');
+        return view('cartwire::components.add-to-cart');
     }
 }

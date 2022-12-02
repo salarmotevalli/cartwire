@@ -29,6 +29,6 @@ class ChangeAmount extends Component {
 
     public function render()
     {
-        return view('Cart::components.change-amount');
+        return view('cartwire::components.change-amount');
     }
 }

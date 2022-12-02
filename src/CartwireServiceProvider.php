@@ -11,13 +11,13 @@ use Salarmotevalli\CartWire\Http\Livewire\CartPage;
 use Salarmotevalli\CartWire\Http\Livewire\Components\AddToCart;
 use Salarmotevalli\CartWire\Http\Livewire\Components\ChangeAmount;
 use Salarmotevalli\CartWire\Http\Livewire\Components\NavigationItem;
-use Salarmotevalli\CartWire\Http\Livewire\Components\UpdateAmount;
 
 class CartwireServiceProvider extends ServiceProvider
 {
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/cartwire.php', 'cartwire');
+
         App::bind('cart', function () {
             return new Cart();
         });
@@ -27,12 +27,21 @@ class CartwireServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'Cart');
-        Livewire::component('CartPage', CartPage::class);
-        Livewire::component('NavigationItem', NavigationItem::class);
-        Livewire::component('AddToCart', AddToCart::class);
-        Livewire::component('UpdateAmount', UpdateAmount::class);
-        Livewire::component('change-amount', ChangeAmount::class);
+        
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'cartwire');
+
+        Livewire::component('CartPage',         CartPage::class);
+        Livewire::component('NavigationItem',   NavigationItem::class);
+        Livewire::component('AddToCart',        AddToCart::class);
+        Livewire::component('change-amount',    ChangeAmount::class);
+
+        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/cartwire'),
+        ], 'cartwire-views');
+
+        $this->publishes([
+            __DIR__.'/../config/cartwire.php' => config_path('cartwire.php'),
+        ], 'cartwire-config');
     }
 
     private function registerCommands() {
