@@ -35,6 +35,7 @@ class Cart
 
         if (is_int($index)) {
             $this->amountIncrement($cart, $index);
+            return;
         }
 
         $this->addFirstToCart($cart, $model);
