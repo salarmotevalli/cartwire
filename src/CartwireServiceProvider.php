@@ -27,25 +27,14 @@ class CartwireServiceProvider extends ServiceProvider
 
     public function boot()
     {
-
+        //load views
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'cartwire');
 
-        Livewire::component('CartPage',         CartPage::class);
-        Livewire::component('NavigationItem',   NavigationItem::class);
-        Livewire::component('AddToCart',        AddToCart::class);
-        Livewire::component('change-amount',    ChangeAmount::class);
+        // register livewire components
+        $this->registerLivewireComponents();
 
-        $this->publishes([
-            __DIR__ . '/../lang' => lang_path('vendor/cartwire'),
-        ]);
-
-        $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/cartwire'),
-        ], 'cartwire-views');
-
-        $this->publishes([
-            __DIR__ . '/../config/cartwire.php' => config_path('cartwire.php'),
-        ], 'cartwire-config');
+        // incloud all publishes
+        $this->registerPublishes();
     }
 
     private function registerCommands()
@@ -55,5 +44,31 @@ class CartwireServiceProvider extends ServiceProvider
         ];
 
         $this->commands($commands);
+    }
+
+    public function registerLivewireComponents()
+    {
+        Livewire::component('CartPage',         CartPage::class);
+        Livewire::component('NavigationItem',   NavigationItem::class);
+        Livewire::component('AddToCart',        AddToCart::class);
+        Livewire::component('change-amount',    ChangeAmount::class);
+    }
+
+    public function registerPublishes()
+    {
+        // langs
+        $this->publishes([
+            __DIR__ . '/../lang' => lang_path('vendor/cartwire'),
+        ]);
+
+        // views
+        $this->publishes([
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/cartwire'),
+        ], 'cartwire-views');
+
+        // config
+        $this->publishes([
+            __DIR__ . '/../config/cartwire.php' => config_path('cartwire.php'),
+        ], 'cartwire-config');
     }
 }
