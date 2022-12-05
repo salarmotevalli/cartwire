@@ -16,7 +16,7 @@ return [
 
 
     'table' => [
-        'id', 'name', 'created_at'
+        'name', 'created_at'
     ],
 
 

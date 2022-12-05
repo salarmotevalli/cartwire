@@ -1,9 +1,10 @@
 <div class="container mt-5">
     <div class="d-lg-flex p-3 bg-white justify-content-lg-between shadow rounded-4 text-start mb-5">
         <section class="p-2 rounded-4 card-body table-responsive mb-5 mb-lg-0">
-            <table class="table table-striped ">
+            <table class="table table-striped" id="cart-table">
                 <thead>
                     <tr>
+                        <td></td>
                         @foreach ($columns as $column)
                             <td>{{ $column }}</td>
                         @endforeach
@@ -17,6 +18,7 @@
                 <tbody>
                     @foreach ($items as $item)
                         <tr class="mb-3">
+                            <td class="cart-table-row"></td>
                             @foreach ($columns as $column)
                                 <td>{{ $item[$column] }}</td>
                             @endforeach
@@ -58,4 +60,5 @@
         </section>
 
     </div>
+    @include('cartwire::js.cartpage-js')
 </div>
