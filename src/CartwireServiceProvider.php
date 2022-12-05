@@ -27,7 +27,7 @@ class CartwireServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        
+
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'cartwire');
 
         Livewire::component('CartPage',         CartPage::class);
@@ -36,15 +36,20 @@ class CartwireServiceProvider extends ServiceProvider
         Livewire::component('change-amount',    ChangeAmount::class);
 
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/cartwire'),
+            __DIR__ . '/../lang' => lang_path('vendor/cartwire'),
+        ]);
+
+        $this->publishes([
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/cartwire'),
         ], 'cartwire-views');
 
         $this->publishes([
-            __DIR__.'/../config/cartwire.php' => config_path('cartwire.php'),
+            __DIR__ . '/../config/cartwire.php' => config_path('cartwire.php'),
         ], 'cartwire-config');
     }
 
-    private function registerCommands() {
+    private function registerCommands()
+    {
         $commands = [
             InstallCommand::class,
         ];
