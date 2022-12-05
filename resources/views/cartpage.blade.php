@@ -9,8 +9,8 @@
                             <td>{{ $column }}</td>
                         @endforeach
                         <td>
-                            <span>amount</span> /
-                            <span class="text-danger">delete</span> 
+                            <span>{{ __('amount') }}</span> /
+                            <span class="text-danger">{{ __('delete') }}</span> 
 
                         </td>
                     </tr>
@@ -32,7 +32,7 @@
 
         <section class="p-3 bg-info rounded-4">
             <div class="text-white mb-4">
-                <small class="text-secondary h5 text-md">total:</small>
+                <small class="text-secondary h5 text-md">{{ __('total') }}:</small>
                 <div class="border-bottom"></div>
                 <p class="text-white h3 ml-4 mt-1">$1000</p>
             </div>
@@ -54,7 +54,7 @@
             </div>
             <div>
                 <button wire:click="clearCart" class="btn btn-secondary">
-                    clear
+                    {{ __('clear') }}
                 </button>
             </div>
         </section>

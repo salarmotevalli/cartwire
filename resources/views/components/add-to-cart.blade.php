@@ -1,1 +1,1 @@
-<button class="btn btn-success" wire:click="add">add to cart</button>
+<button class="btn btn-success" wire:click="add">{{ __('add to cart') }}</button>
