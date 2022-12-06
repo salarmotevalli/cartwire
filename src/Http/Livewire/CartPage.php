@@ -3,6 +3,7 @@
 namespace Salarmotevalli\CartWire\Http\Livewire;
 
 use Livewire\Component;
+use Salarmotevalli\CartWire\Enums\TableColumnStatus;
 use Salarmotevalli\CartWire\Facades\Cart;
 
 class CartPage extends Component
@@ -34,6 +35,8 @@ class CartPage extends Component
 
     public function render()
     {
-        return view('cartwire::cartpage');
+        return view('cartwire::cartpage', [
+        
+        ]);
     }
 }

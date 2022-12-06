@@ -54,7 +54,7 @@
             </div>
             <div>
                 <button wire:click="clearCart" class="btn btn-secondary">
-                    {{ trans('clear')}}
+                    {{ __('clear')}}
                 </button>
             </div>
         </section>
