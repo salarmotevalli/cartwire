@@ -3,18 +3,16 @@
 namespace Salarmotevalli\CartWire\Http\Livewire;
 
 use Livewire\Component;
-use Salarmotevalli\CartWire\Enums\TableColumnStatus;
+use Salarmotevalli\CartWire\Contracts\Enums\TableColumnStatus;
 use Salarmotevalli\CartWire\Facades\Cart;
 
 class CartPage extends Component
 {
     public array $items;
-    public array $columns;
 
     public function mount()
     {
         $this->getCart();
-        $this->columns= config('cartwire.table');
     }
 
     protected function getListeners()
@@ -35,8 +33,9 @@ class CartPage extends Component
 
     public function render()
     {
-        return view('cartwire::cartpage', [
-        
-        ]);
+        $columns= config('cartwire.table');
+        $column_statuses = TableColumnStatus::options();
+
+        return view('cartwire::cartpage', compact('columns', 'column_statuses'));
     }
 }

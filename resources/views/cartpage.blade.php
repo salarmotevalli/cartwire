@@ -5,12 +5,12 @@
                 <thead>
                     <tr>
                         <td></td>
-                        @foreach ($columns as $column)
-                            <td>{{ $column }}</td>
+                        @foreach ($columns as $name => $status)
+                            <td>{{ $name }}</td>
                         @endforeach
                         <td>
                             <span>{{ __('amount') }}</span> /
-                            <span class="text-danger">{{ __('delete') }}</span> 
+                            <span class="text-danger">{{ __('delete') }}</span>
 
                         </td>
                     </tr>
@@ -19,8 +19,12 @@
                     @foreach ($items as $item)
                         <tr class="mb-3">
                             <td class="cart-table-row"></td>
-                            @foreach ($columns as $column)
-                                <td>{{ $item[$column] }}</td>
+                            @foreach ($columns as $name => $status)
+                                @if ($status == $column_statuses['REQUIRED'])
+                                    <td>{{ $item[$name] }}</td>
+                                @elseif($status == $column_statuses['NULLABLE'])
+                                    <td>{{ $item[$name] ?? '-' }}</td>
+                                @endif
                             @endforeach
                             <livewire:change-amount :item_amount="$item['amount']" :item_id="$item['id']" :wire:key="$item['id']">
 
@@ -54,7 +58,7 @@
             </div>
             <div>
                 <button wire:click="clearCart" class="btn btn-secondary">
-                    {{ __('clear')}}
+                    {{ __('clear') }}
                 </button>
             </div>
         </section>

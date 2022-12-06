@@ -1,6 +1,6 @@
 <?php
 
-use Salarmotevalli\CartWire\Enums\TableColumnStatus;
+use Salarmotevalli\CartWire\Contracts\Enums\TableColumnStatus;
 
 return [
 
@@ -19,10 +19,8 @@ return [
 
 
     'table' => [
-        'name' => TableColumnStatus::REQUIRED,
-        'named' => TableColumnStatus::REQUIRED,
-        'created_at' => TableColumnStatus::NULLABLE,
-        'created_a' => TableColumnStatus::NULLABLE,
+        'name' => TableColumnStatus::REQUIRED->value,
+        'created_at' => TableColumnStatus::NULLABLE->value,
     ],
 
 
