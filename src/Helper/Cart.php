@@ -2,14 +2,12 @@
 
 namespace Salarmotevalli\CartWire\Helper;
 
+use Salarmotevalli\CartWire\Exceptions\ParametersException;
+
 class Cart
 {
-    public mixed $models;
-
     public function __construct()
     {
-        $model = config('cartwire.model');
-        $this->models = $model;
         if ($this->get() === null)
             $this->set($this->empty());
     }
@@ -27,21 +25,28 @@ class Cart
         $this->set($cart);
     }
 
-    public function add(int $model_id) //handle the adding item to cart
+    public function add(int $model_id, array $data = []) //handle the adding item to cart
     {
-        $model = $this->models::find($model_id);
+        // Check parameters
+        if (!isset($data['id'], $data['price']))
+            throw new ParametersException('Your entry data does\'n contain id and price, you must pass id and price.');
+
+        // Get current cart
         $cart = $this->get();
-        $index = array_search($model_id, array_column($cart['models'], 'id'));
+
+        // Check id exist
+        $index = array_search($data['id'], array_column($cart['models'], 'id'));
 
         if (is_int($index)) {
             $this->amountIncrement($cart, $index);
             return;
         }
 
-        $this->addFirstToCart($cart, $model);
+        // $this->addFirstToCart($cart, $model);
     }
 
-    public function count(): int {
+    public function count(): int
+    {
         return count($this->get()['models']);
     }
 
