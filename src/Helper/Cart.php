@@ -17,7 +17,7 @@ class Cart
         return request()->session()->get('cart');
     }
 
-    public function updateAmount(int $item_id, int $amount): void
+    public function updateAmount(mixed $item_id, int $amount): void
     {
         $cart = $this->get();
         $index = array_search($item_id, array_column($cart, 'id'));
@@ -37,6 +37,7 @@ class Cart
         // Check id exist
         $index = array_search($data['id'], array_column($cart, 'id'));
 
+        // TODO: handle just in one method
         $cart = is_int($index) 
             ? $this->amountIncrement($cart, $index)
             : $this->addFirstToCart($cart, $data);
@@ -77,7 +78,7 @@ class Cart
         return $cart;
     }
 
-    private function addFirstToCart($cart,array $data): array
+    private function addFirstToCart(array $cart,array $data): array
     {
         $data['amount'] = 1;
         $cart[] = $data;
@@ -98,10 +99,4 @@ class Cart
     //     }
     //     return $price;
     // }
-
-    // public function orderPriceWithPost()
-    // {
-    //     return $this->orderPrice() + 18000;
-    // }
-
 }
