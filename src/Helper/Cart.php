@@ -20,12 +20,12 @@ class Cart
     public function updateAmount(int $item_id, int $amount): void
     {
         $cart = $this->get();
-        $index = array_search($item_id, array_column($cart['models'], 'id'));
-        $cart['models'][$index]['amount'] = $amount;
+        $index = array_search($item_id, array_column($cart, 'id'));
+        $cart[$index]['amount'] = $amount;
         $this->set($cart);
     }
 
-    public function add(int $model_id, array $data = []) //handle the adding item to cart
+    public function add(array $data = [])
     {
         // Check parameters
         if (!isset($data['id'], $data['price']))
@@ -35,25 +35,25 @@ class Cart
         $cart = $this->get();
 
         // Check id exist
-        $index = array_search($data['id'], array_column($cart['models'], 'id'));
+        $index = array_search($data['id'], array_column($cart, 'id'));
 
         if (is_int($index)) {
             $this->amountIncrement($cart, $index);
             return;
         }
 
-        // $this->addFirstToCart($cart, $model);
+        $this->addFirstToCart($cart, $data);
     }
 
     public function count(): int
     {
-        return count($this->get()['models']);
+        return count($this->get());
     }
 
     public function remove(int $item_id): void
     {
         $cart = $this->get();
-        array_splice($cart['models'], array_search($item_id, array_column($cart['models'], 'id')), 1);
+        array_splice($cart, array_search($item_id, array_column($cart, 'id')), 1);
         $this->set($cart);
     }
 
@@ -64,9 +64,7 @@ class Cart
 
     private function empty(): array
     {
-        return [
-            'models' => [],
-        ];
+        return [];
     }
 
     private function set($cart): void
@@ -76,14 +74,14 @@ class Cart
 
     private function amountIncrement(array $cart, int $index)
     {
-        $cart['models'][$index]['amount']++;
+        $cart[$index]['amount']++;
         $this->set($cart);
     }
 
     private function addFirstToCart($cart, $model)
     {
         $model->amount = 1;
-        $cart['models'][] = $model->toArray();
+        $cart[] = $model->toArray();
         $this->set($cart);
     }
 
