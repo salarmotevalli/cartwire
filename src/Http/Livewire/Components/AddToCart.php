@@ -7,11 +7,11 @@ use Salarmotevalli\CartWire\Http\Livewire\CartPage;
 
 class AddToCart extends \Livewire\Component
 {
-    public int $item_id;
+    public array $data;
 
     public function add()
     {
-        Cart::add($this->item_id);
+        Cart::add($this->data);
         $this->emit('itemChanged');
     }
 

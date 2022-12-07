@@ -25,7 +25,7 @@ class Cart
         $this->set($cart);
     }
 
-    public function add(array $data = [])
+    public function add(array $data): void
     {
         // Check parameters
         if (!isset($data['id'], $data['price']))
@@ -37,12 +37,11 @@ class Cart
         // Check id exist
         $index = array_search($data['id'], array_column($cart, 'id'));
 
-        if (is_int($index)) {
-            $this->amountIncrement($cart, $index);
-            return;
-        }
+        $cart = is_int($index) 
+            ? $this->amountIncrement($cart, $index)
+            : $this->addFirstToCart($cart, $data);
 
-        $this->addFirstToCart($cart, $data);
+        $this->set($cart);
     }
 
     public function count(): int
@@ -72,17 +71,17 @@ class Cart
         request()->session()->put('cart', $cart);
     }
 
-    private function amountIncrement(array $cart, int $index)
+    private function amountIncrement(array $cart, int $index): array
     {
         $cart[$index]['amount']++;
-        $this->set($cart);
+        return $cart;
     }
 
-    private function addFirstToCart($cart, $model)
+    private function addFirstToCart($cart,array $data): array
     {
-        $model->amount = 1;
-        $cart[] = $model->toArray();
-        $this->set($cart);
+        $data['amount'] = 1;
+        $cart[] = $data;
+        return $cart;
     }
 
     // public function orderPrice(): int

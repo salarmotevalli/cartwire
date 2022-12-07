@@ -22,7 +22,7 @@ class CartPage extends Component
     
     public function getCart(): void
     {
-        $this->items = Cart::get()['models'];
+        $this->items = Cart::get();
     }
 
     public function clearCart()

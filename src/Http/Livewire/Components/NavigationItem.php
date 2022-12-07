@@ -9,7 +9,7 @@ class NavigationItem extends Component
 
     public function mount(): void
     {
-        $this->count = count(Cart::get()['models']);
+        $this->count = count(Cart::get());
     }
 
     protected $listeners = [
