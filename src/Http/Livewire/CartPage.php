@@ -33,7 +33,7 @@ class CartPage extends Component
 
     public function render()
     {
-        $columns= config('cartwire.table');
+        $columns= config('cartwire.table-columns');
         $column_statuses = TableColumnStatus::options();
 
         return view('cartwire::cartpage', compact('columns', 'column_statuses'));
