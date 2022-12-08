@@ -15,6 +15,7 @@ class ChangeAmount extends Component {
         // TODO: test
         if ($this->item_amount > 0) {
             Cart::updateAmount($this->item_id, $this->item_amount);
+            $this->emit('cart_changed');
         } else {
             // TODO: send notif for deleting | test
         }
@@ -24,7 +25,7 @@ class ChangeAmount extends Component {
     public function deleteItem(): void
     {
         Cart::remove($this->item_id);
-        $this->emit('item_deleted');
+        $this->emit('cart_changed');
     }
 
     public function render()
