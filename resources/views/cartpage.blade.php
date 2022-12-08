@@ -9,12 +9,15 @@
                             <td>{{ $name }}</td>
                         @endforeach
                         <td>
-                            {{ __('price') }}
+                            {{ __('product price') }}
                         </td>
                         <td>
                             <span>{{ __('amount') }}</span> /
                             <span class="text-danger">{{ __('delete') }}</span>
 
+                        </td>
+                        <td>
+                            {{ __('total price') }}
                         </td>
                     </tr>
                 </thead>
@@ -33,6 +36,8 @@
                             <td>{{ $item['price'] }}</td>
 
                             <livewire:change-amount :item_amount="$item['amount']" :item_id="$item['id']" :wire:key="$item['id']">
+
+                            <td>{{ $item['total'] }}</td>
 
                         </tr>
                     @endforeach
