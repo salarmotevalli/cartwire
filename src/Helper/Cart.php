@@ -21,8 +21,7 @@ class Cart
     {
         $cart = $this->get();
         $index = array_search($item_id, array_column($cart, 'id'));
-        $cart[$index]['amount'] = $amount;
-        $cart[$index]['total'] = $cart[$index]['price'] * $cart[$index]['amount'];
+        $cart[$index] = $this->setAmountAndPrice([], $amount); 
         $this->set($cart);
     }
 
@@ -75,17 +74,23 @@ class Cart
 
     private function amountIncrement(array $cart, int $index): array
     {
-        $cart[$index]['amount']++;
-        $cart[$index]['total'] = $cart[$index]['price'] * $cart[$index]['amount'];
+        $cart[$index] = $this->setAmountAndPrice([], $cart[$index]['amount']++); 
         return $cart;
     }
 
-    private function addFirstToCart(array $cart,array $data): array
+    private function addFirstToCart(array $cart,array $item): array
     {
-        $data['amount'] = 1;
-        $data['total'] = $data['price'];
-        $cart[] = $data;
+        $item['amount'] = 1;
+        $item['total'] = $item['price'];
+        $cart[] = $item;
         return $cart;
+    }
+
+    private function setAmountAndPrice(array $item, $amount): array
+    {
+        $item['amount'] = $amount;
+        $item['total'] = $item['price'] * $item['amount'];
+        return $item;
     }
 
     // public function orderPrice(): int
