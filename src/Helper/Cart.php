@@ -29,20 +29,15 @@ class Cart
     public function add(array $item): void
     {
         // Check parameters
-        if (! isset($item['id'], $item['price'])) {
+        if (!isset($item['id'], $item['price'])) {
             throw new ParametersException('Your entry data does\'n contain id and price, you must pass id and price.');
         }
 
         // Get current cart
         $cart = $this->get();
 
-        // Check id exist
-        $index = array_search($item['id'], array_column($cart, 'id'));
-
         // TODO: handle just in one method
-        $cart = is_int($index)
-            ? $this->amountIncrement($cart, $index)
-            : $this->addFirstToCart($cart, $item);
+        $cart = $this->amountIncrement($cart, $item);
 
         $this->set($cart);
     }
@@ -74,16 +69,17 @@ class Cart
         request()->session()->put('cart', $cart);
     }
 
-    private function amountIncrement(array $cart, int $index): array
+    private function amountIncrement(array $cart, array $item): array
     {
-        $cart[$index] = $this->setAmountAndTotal($cart[$index], ++$cart[$index]['amount']);
+        // Check id exist
+        $index = array_search($item['id'], array_column($cart, 'id'));
+        
+        if (is_int($index)) {
+            $cart[$index] = $this->setAmountAndTotal($cart[$index], ++$cart[$index]['amount']);
+        } else {
+            $cart[] = $this->setAmountAndTotal($item, 1);
+        }
 
-        return $cart;
-    }
-
-    private function addFirstToCart(array $cart, array $item): array
-    {
-        $cart[] = $this->setAmountAndTotal($item, 1);
 
         return $cart;
     }
