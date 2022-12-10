@@ -10,11 +10,10 @@ return [
 
     'cart-page-route' => 'cart',
 
-    // TODO: it have to delete 
+    // TODO: it have to delete
     'model' => \App\Models\User::class,
 
     // TODO: 'store' => 'session', // database, cookie, session
-
 
     'table-columns' => [
         'name' => TableColumnStatus::REQUIRED->value,

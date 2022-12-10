@@ -16,7 +16,7 @@ class CartwireServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/cartwire.php', 'cartwire');
+        $this->mergeConfigFrom(__DIR__.'/../config/cartwire.php', 'cartwire');
 
         App::bind('cart', function () {
             return new Cart();
@@ -28,7 +28,7 @@ class CartwireServiceProvider extends ServiceProvider
     public function boot()
     {
         //load views
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'cartwire');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'cartwire');
 
         // register livewire components
         $this->registerLivewireComponents();
@@ -48,27 +48,27 @@ class CartwireServiceProvider extends ServiceProvider
 
     public function registerLivewireComponents()
     {
-        Livewire::component('CartPage',         CartPage::class);
-        Livewire::component('NavigationItem',   NavigationItem::class);
-        Livewire::component('AddToCart',        AddToCart::class);
-        Livewire::component('change-amount',    ChangeAmount::class);
+        Livewire::component('CartPage', CartPage::class);
+        Livewire::component('NavigationItem', NavigationItem::class);
+        Livewire::component('AddToCart', AddToCart::class);
+        Livewire::component('change-amount', ChangeAmount::class);
     }
 
     public function registerPublishes()
     {
         // langs
         $this->publishes([
-            __DIR__ . '/../lang' => lang_path('vendor/cartwire'),
+            __DIR__.'/../lang' => lang_path('vendor/cartwire'),
         ]);
 
         // views
         $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/cartwire'),
+            __DIR__.'/../resources/views' => resource_path('views/vendor/cartwire'),
         ], 'cartwire-views');
 
         // config
         $this->publishes([
-            __DIR__ . '/../config/cartwire.php' => config_path('cartwire.php'),
+            __DIR__.'/../config/cartwire.php' => config_path('cartwire.php'),
         ], 'cartwire-config');
     }
 }

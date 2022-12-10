@@ -4,7 +4,6 @@ namespace Salarmotevalli\CartWire\Contracts\Traits;
 
 trait EnumTrait
 {
-
     public static function getValues(): array
     {
         return array_column(self::cases(), 'value');
@@ -24,5 +23,4 @@ trait EnumTrait
     {
         return array_combine(self::getValues(), self::getCases());
     }
-
 }

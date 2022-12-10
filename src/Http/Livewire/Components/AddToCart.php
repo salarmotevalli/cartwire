@@ -3,7 +3,6 @@
 namespace Salarmotevalli\CartWire\Http\Livewire\Components;
 
 use Salarmotevalli\CartWire\Facades\Cart;
-use Salarmotevalli\CartWire\Http\Livewire\CartPage;
 
 class AddToCart extends \Livewire\Component
 {

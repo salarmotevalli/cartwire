@@ -8,8 +8,9 @@ class Cart
 {
     public function __construct()
     {
-        if ($this->get() === null)
+        if ($this->get() === null) {
             $this->set($this->empty());
+        }
     }
 
     public function get(): ?array
@@ -21,26 +22,27 @@ class Cart
     {
         $cart = $this->get();
         $index = array_search($item_id, array_column($cart, 'id'));
-        $cart[$index] = $this->setAmountAndPrice([], $amount); 
+        $cart[$index] = $this->setAmountAndTotal($cart[$index], $amount);
         $this->set($cart);
     }
 
-    public function add(array $data): void
+    public function add(array $item): void
     {
         // Check parameters
-        if (!isset($data['id'], $data['price']))
+        if (! isset($item['id'], $item['price'])) {
             throw new ParametersException('Your entry data does\'n contain id and price, you must pass id and price.');
+        }
 
         // Get current cart
         $cart = $this->get();
 
         // Check id exist
-        $index = array_search($data['id'], array_column($cart, 'id'));
+        $index = array_search($item['id'], array_column($cart, 'id'));
 
         // TODO: handle just in one method
-        $cart = is_int($index) 
+        $cart = is_int($index)
             ? $this->amountIncrement($cart, $index)
-            : $this->addFirstToCart($cart, $data);
+            : $this->addFirstToCart($cart, $item);
 
         $this->set($cart);
     }
@@ -74,22 +76,23 @@ class Cart
 
     private function amountIncrement(array $cart, int $index): array
     {
-        $cart[$index] = $this->setAmountAndPrice([], $cart[$index]['amount']++); 
+        $cart[$index] = $this->setAmountAndTotal($cart[$index], ++$cart[$index]['amount']);
+
         return $cart;
     }
 
-    private function addFirstToCart(array $cart,array $item): array
+    private function addFirstToCart(array $cart, array $item): array
     {
-        $item['amount'] = 1;
-        $item['total'] = $item['price'];
-        $cart[] = $item;
+        $cart[] = $this->setAmountAndTotal($item, 1);
+
         return $cart;
     }
 
-    private function setAmountAndPrice(array $item, $amount): array
+    private function setAmountAndTotal(array $item, $amount): array
     {
         $item['amount'] = $amount;
         $item['total'] = $item['price'] * $item['amount'];
+
         return $item;
     }
 

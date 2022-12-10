@@ -5,9 +5,10 @@ namespace Salarmotevalli\CartWire\Http\Livewire\Components;
 use Livewire\Component;
 use Salarmotevalli\CartWire\Facades\Cart;
 
-class ChangeAmount extends Component {
-
+class ChangeAmount extends Component
+{
     public $item_id;
+
     public $item_amount;
 
     public function updatedItemAmount()
@@ -19,7 +20,6 @@ class ChangeAmount extends Component {
         } else {
             // TODO: send notif for deleting | test
         }
-
     }
 
     public function deleteItem(): void

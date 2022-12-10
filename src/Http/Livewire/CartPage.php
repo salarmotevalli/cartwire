@@ -18,10 +18,10 @@ class CartPage extends Component
     protected function getListeners()
     {
         return [
-            'cart_changed' => 'getCart'
+            'cart_changed' => 'getCart',
         ];
     }
-    
+
     public function getCart(): void
     {
         $this->items = Cart::get();
@@ -35,7 +35,7 @@ class CartPage extends Component
 
     public function render()
     {
-        $columns= config('cartwire.table-columns');
+        $columns = config('cartwire.table-columns');
         $column_statuses = TableColumnStatus::options();
 
         return view('cartwire::cartpage', compact('columns', 'column_statuses'));
