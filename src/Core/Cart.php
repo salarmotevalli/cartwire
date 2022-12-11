@@ -1,6 +1,6 @@
 <?php
 
-namespace Salarmotevalli\CartWire\Helper;
+namespace Salarmotevalli\CartWire\Core;
 
 use Salarmotevalli\CartWire\Exceptions\ParametersException;
 

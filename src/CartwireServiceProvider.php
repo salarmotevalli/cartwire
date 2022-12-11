@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use Salarmotevalli\CartWire\Console\InstallCommand;
-use Salarmotevalli\CartWire\Helper\Cart;
+use Salarmotevalli\CartWire\Core\Cart;
 use Salarmotevalli\CartWire\Http\Livewire\CartPage;
 use Salarmotevalli\CartWire\Http\Livewire\Components\AddToCart;
 use Salarmotevalli\CartWire\Http\Livewire\Components\ChangeAmount;
