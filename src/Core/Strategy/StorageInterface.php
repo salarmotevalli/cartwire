@@ -9,13 +9,13 @@ interface StorageInterface {
 
     public function get(): Cart;
 
-    public function add(): void;
+    public function add(array $item): void;
 
     public function update(Item $item, array $new_item): Cart;
 
     public function updateAmount(Item $item, int $amount): Cart;
 
-    public function remove(Item $item): Cart;
+    public function remove(Item $item);
 
     public function count(): int;
 

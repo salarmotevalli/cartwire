@@ -4,7 +4,7 @@ namespace Cartwire\Http\Livewire;
 
 use Livewire\Component;
 use Cartwire\Core\Enums\TableColumnStatus;
-use Cartwire\Facades\Cart;
+use Cartwire\Facades\Cartwire;
 
 class CartPage extends Component
 {
@@ -24,12 +24,12 @@ class CartPage extends Component
 
     public function getCart(): void
     {
-        $this->items = Cart::get();
+        $this->items = Cartwire::get();
     }
 
     public function clearCart()
     {
-        Cart::clear();
+        Cartwire::clear();
         $this->mount();
     }
 

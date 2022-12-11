@@ -2,7 +2,7 @@
 
 namespace Cartwire\Http\Livewire\Components;
 
-use Cartwire\Facades\Cart;
+use Cartwire\Facades\Cartwire;
 
 class AddToCart extends \Livewire\Component
 {
@@ -10,7 +10,7 @@ class AddToCart extends \Livewire\Component
 
     public function add()
     {
-        Cart::add($this->data);
+        Cartwire::add($this->data);
         $this->emit('itemChanged');
     }
 

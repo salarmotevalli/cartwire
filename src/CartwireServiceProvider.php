@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use Cartwire\Console\InstallCommand;
-use Cartwire\Core\Cart;
+use Cartwire\Core\Cartwire;
 use Cartwire\Http\Livewire\CartPage;
 use Cartwire\Http\Livewire\Components\AddToCart;
 use Cartwire\Http\Livewire\Components\ChangeAmount;
@@ -18,8 +18,8 @@ class CartwireServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/cartwire.php', 'cartwire');
 
-        App::bind('cart', function () {
-            return new Cart();
+        App::bind('cartwire', function () {
+            return new Cartwire();
         });
 
         $this->registerCommands();

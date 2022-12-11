@@ -2,13 +2,15 @@
 
 namespace Cartwire\Storage;
 
-use Cartwire\Contracts\Cart;
+use Cartwire\Contracts\Cart as CartInterface;
 use Cartwire\Contracts\Item;
 use Cartwire\Core\Strategy\StorageInterface;
+use Cartwire\Exceptions\ParametersException;
 
-class Session implements StorageInterface {
+class Session implements StorageInterface
+{
 
-	 // public function __construct()
+    // public function __construct()
     // {
     //     if ($this->get() === null) {
     //         $this->set($this->empty());
@@ -61,53 +63,71 @@ class Session implements StorageInterface {
     //     $this->set($this->empty());
     // }
 
-	/**
-	 * @return Cart
-	 */
-	public function get(): Cart {
-	}
-	
-	/**
-	 */
-	public function add(): void {
-	}
-	
-	/**
-	 *
-	 * @param Item $item
-	 * @param array $new_item
-	 * @return Cart
-	 */
-	public function update(Item $item, array $new_item): Cart {
-	}
-	
-	/**
-	 *
-	 * @param Item $item
-	 * @param int $amount
-	 * @return Cart
-	 */
-	public function updateAmount(Item $item, int $amount): Cart {
-	}
-	
-	/**
-	 *
-	 * @param Item $item
-	 * @return Cart
-	 */
-	public function remove(Item $item): Cart {
-	}
-	
-	/**
-	 * @return int
-	 */
-	public function count(): int {
-	}
-	
-	/**
-	 */
-	public function clear(): void {
-	}
+    /**
+     * @return CartInterface
+     */
+    public function get(): CartInterface
+    {
+    
+    }
+
+    /**
+     */
+    public function add(array $item): void
+    {
+        if (!isset($item['id'], $item['price'])) {
+            throw new ParametersException('Your entry data does\'n contain id and price, you must pass id and price.');
+        }
+
+        $item = new Item($item);
+        // Get current cart
+        $cart = $this->get();
+
+        $cart = $this->amountIncrement($cart, $item);
+
+        $this->set($cart);
+    }
+
+    /**
+     *
+     * @param Item $item
+     * @param array $new_item
+     * @return CartInterface
+     */
+    public function update(Item $item, array $new_item): CartInterface
+    {
+    }
+
+    /**
+     *
+     * @param Item $item
+     * @param int $amount
+     * @return CartInterface
+     */
+    public function updateAmount(Item $item, int $amount): CartInterface
+    {
+    }
+
+    /**
+     *
+     * @param Item $item
+     */
+    public function remove(Item $item)
+    {
+    }
+
+    /**
+     * @return int
+     */
+    public function count(): int
+    {
+    }
+
+    /**
+     */
+    public function clear(): void
+    {
+    }
 
     private function empty(): array
     {
@@ -123,7 +143,7 @@ class Session implements StorageInterface {
     {
         // Check id exist
         $index = array_search($item['id'], array_column($cart, 'id'));
-        
+
         if (is_int($index)) {
             $cart[$index] = $this->setAmountAndTotal($cart[$index], ++$cart[$index]['amount']);
         } else {

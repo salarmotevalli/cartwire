@@ -3,7 +3,7 @@
 namespace Cartwire\Http\Livewire\Components;
 
 use Livewire\Component;
-use Cartwire\Facades\Cart;
+use Cartwire\Facades\Cartwire;
 
 class NavigationItem extends Component
 {
@@ -11,7 +11,7 @@ class NavigationItem extends Component
 
     public function mount(): void
     {
-        $this->count = count(Cart::get());
+        $this->count = count(Cartwire::get());
     }
 
     protected $listeners = [
@@ -20,7 +20,7 @@ class NavigationItem extends Component
 
     public function updateCartTotal(): void
     {
-        $this->count = Cart::count();
+        $this->count = Cartwire::count();
     }
 
     public function render()

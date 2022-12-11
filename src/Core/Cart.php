@@ -2,24 +2,9 @@
 
 namespace Cartwire\Core;
 
-use Cartwire\Core\Strategy\StorageInterface;
+use Cartwire\Contracts\Cart as ContractsCart;
 
-class Cart
+class Cart implements ContractsCart 
 {
-    private $driver;
-
-    public function __construct() 
-    {
-        $this->driver = new (config('cartwire.driver'));
-    }
-
-    public function driver(StorageInterface $driver = null): StorageInterface
-    {
-        if ($driver != null) {
-            $this->driver = $driver;
-        }
-
-        return $this->driver;
-    }
-
+    
 }
