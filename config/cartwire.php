@@ -13,7 +13,7 @@ return [
     // TODO: it have to delete
     'model' => \App\Models\User::class,
 
-    // TODO: 'store' => 'session', // database, cookie, session
+    'driver' => Cartwire\Storage\Session::class, // database, cookie, session
 
     'table-columns' => [
         'name' => TableColumnStatus::REQUIRED->value,
