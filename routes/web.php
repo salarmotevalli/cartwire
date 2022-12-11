@@ -13,4 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/'.config('cartwire.cart-page-route'), \Salarmotevalli\CartWire\Http\Livewire\CartPage::class)->name('cart.list');
+Route::get('/'.config('cartwire.cart-page-route'), Cartwire\Http\Livewire\CartPage::class)->name('cart.list');

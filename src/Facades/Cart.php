@@ -1,6 +1,6 @@
 <?php
 
-namespace Salarmotevalli\CartWire\Facades;
+namespace Cartwire\Facades;
 
 class Cart extends \Illuminate\Support\Facades\Facade
 {

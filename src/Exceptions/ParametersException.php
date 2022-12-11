@@ -1,6 +1,6 @@
 <?php
 
-namespace Salarmotevalli\CartWire\Exceptions;
+namespace Cartwire\Exceptions;
 
 use Exception;
 

@@ -1,22 +1,22 @@
 <?php
 
-namespace Salarmotevalli\CartWire;
+namespace Cartwire;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use Salarmotevalli\CartWire\Console\InstallCommand;
-use Salarmotevalli\CartWire\Core\Cart;
-use Salarmotevalli\CartWire\Http\Livewire\CartPage;
-use Salarmotevalli\CartWire\Http\Livewire\Components\AddToCart;
-use Salarmotevalli\CartWire\Http\Livewire\Components\ChangeAmount;
-use Salarmotevalli\CartWire\Http\Livewire\Components\NavigationItem;
+use Cartwire\Console\InstallCommand;
+use Cartwire\Core\Cart;
+use Cartwire\Http\Livewire\CartPage;
+use Cartwire\Http\Livewire\Components\AddToCart;
+use Cartwire\Http\Livewire\Components\ChangeAmount;
+use Cartwire\Http\Livewire\Components\NavigationItem;
 
 class CartwireServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/cartwire.php', 'cartwire');
+        $this->mergeConfigFrom(__DIR__ . '/../config/cartwire.php', 'cartwire');
 
         App::bind('cart', function () {
             return new Cart();
@@ -28,7 +28,7 @@ class CartwireServiceProvider extends ServiceProvider
     public function boot()
     {
         //load views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'cartwire');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'cartwire');
 
         // register livewire components
         $this->registerLivewireComponents();
@@ -58,17 +58,17 @@ class CartwireServiceProvider extends ServiceProvider
     {
         // langs
         $this->publishes([
-            __DIR__.'/../lang' => lang_path('vendor/cartwire'),
+            __DIR__ . '/../lang' => lang_path('vendor/cartwire'),
         ]);
 
         // views
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/cartwire'),
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/cartwire'),
         ], 'cartwire-views');
 
         // config
         $this->publishes([
-            __DIR__.'/../config/cartwire.php' => config_path('cartwire.php'),
+            __DIR__ . '/../config/cartwire.php' => config_path('cartwire.php'),
         ], 'cartwire-config');
     }
 }

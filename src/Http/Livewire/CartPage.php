@@ -1,10 +1,10 @@
 <?php
 
-namespace Salarmotevalli\CartWire\Http\Livewire;
+namespace Cartwire\Http\Livewire;
 
 use Livewire\Component;
-use Salarmotevalli\CartWire\Contracts\Enums\TableColumnStatus;
-use Salarmotevalli\CartWire\Facades\Cart;
+use Cartwire\Core\Enums\TableColumnStatus;
+use Cartwire\Facades\Cart;
 
 class CartPage extends Component
 {

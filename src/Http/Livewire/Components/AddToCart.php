@@ -1,8 +1,8 @@
 <?php
 
-namespace Salarmotevalli\CartWire\Http\Livewire\Components;
+namespace Cartwire\Http\Livewire\Components;
 
-use Salarmotevalli\CartWire\Facades\Cart;
+use Cartwire\Facades\Cart;
 
 class AddToCart extends \Livewire\Component
 {

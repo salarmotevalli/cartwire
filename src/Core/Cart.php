@@ -1,8 +1,8 @@
 <?php
 
-namespace Salarmotevalli\CartWire\Core;
+namespace Cartwire\Core;
 
-use Salarmotevalli\CartWire\Exceptions\ParametersException;
+use Cartwire\Exceptions\ParametersException;
 
 class Cart
 {

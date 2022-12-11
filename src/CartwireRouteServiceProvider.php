@@ -1,6 +1,6 @@
 <?php
 
-namespace Salarmotevalli\CartWire;
+namespace Cartwire;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;

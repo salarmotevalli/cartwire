@@ -1,6 +1,6 @@
 <?php
 
-namespace Salarmotevalli\CartWire\Console;
+namespace Cartwire\Console;
 
 use Illuminate\Console\Command;
 

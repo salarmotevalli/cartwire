@@ -1,5 +1,5 @@
 <?php
 
-namespace Salarmotevalli\CartWire\Contracts;
+namespace Cartwire\Contracts;
 
 interface Item {}

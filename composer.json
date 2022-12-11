@@ -5,12 +5,12 @@
     "keywords": ["laravel", "tailwind", "cart"],
     "autoload": {
         "psr-4": {
-            "Salarmotevalli\\CartWire\\": "src/"
+            "Cartwire\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Salarmotevalli\\CartWire\\Tests\\": "tests/"
+            "Cartwire\\Tests\\": "tests/"
         }
     },
     "config": {
@@ -34,8 +34,8 @@
     "extra": {
         "laravel" : {
             "providers" : [
-                "Salarmotevalli\\CartWire\\CartwireServiceProvider",
-                "Salarmotevalli\\CartWire\\CartwireRouteServiceProvider"
+                "Cartwire\\CartwireServiceProvider",
+                "Cartwire\\CartwireRouteServiceProvider"
             ]
         }
     }

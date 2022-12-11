@@ -1,6 +1,6 @@
 <?php
 
-use Salarmotevalli\CartWire\Contracts\Enums\TableColumnStatus;
+use Cartwire\Core\Enums\TableColumnStatus;
 
 return [
 
