@@ -32,19 +32,19 @@ class Cartwire
         $this->driver()->add($item);
     }
 
-    public function update(\Cartwire\Contracts\Item $item, array $new_item)
+    public function update($item, array $new_item)
     {
         return $this->driver()->update($item, $new_item);
     }
 
-    public function updateAmount(\Cartwire\Contracts\Item $item, int $amount)
+    public function updateAmount(int $item_id, int $amount)
     {
-        return $this->driver()->updateAmount($item, $amount);
+        return $this->driver()->updateAmount($item_id, $amount);
     }
 
-    public function remove(\Cartwire\Contracts\Item $item)
+    public function remove(int $item_id)
     {
-        $this->driver->remove($item);
+        $this->driver->remove($item_id);
     }
 
     /**
