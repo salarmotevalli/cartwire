@@ -2,20 +2,17 @@
 
 namespace Cartwire\Core\Strategy;
 
-use Cartwire\Contracts\Cart;
-use Cartwire\Contracts\Item;
-
 interface StorageInterface
 {
-    public function get(): Cart;
+    public function get();
 
     public function add(array $item): void;
 
-    public function update(Item $item, array $new_item): Cart;
+    public function update($item, array $new_item);
 
-    public function updateAmount(Item $item, int $amount): Cart;
+    public function updateAmount($item, int $amount);
 
-    public function remove(Item $item);
+    public function remove($item);
 
     public function count(): int;
 

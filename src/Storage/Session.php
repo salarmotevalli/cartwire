@@ -2,126 +2,59 @@
 
 namespace Cartwire\Storage;
 
-use Cartwire\Contracts\Cart as CartInterface;
-use Cartwire\Contracts\Item as ItemInterface;
 use Cartwire\Core\Cart;
-use Cartwire\Core\Item;
 use Cartwire\Core\Strategy\StorageInterface;
 use Cartwire\Exceptions\ParametersException;
 
 class Session implements StorageInterface
 {
-    // public function __construct()
-    // {
-    //     if ($this->get() === null) {
-    //         $this->set($this->empty());
-    //     }
-    // }
-
-    // public function get(): ?array
-    // {
-    //     return request()->session()->get('cart');
-    // }
-
-    // public function updateAmount(mixed $item_id, int $amount): void
-    // {
-    //     $cart = $this->get();
-    //     $index = array_search($item_id, array_column($cart, 'id'));
-    //     $cart[$index] = $this->setAmountAndTotal($cart[$index], $amount);
-    //     $this->set($cart);
-    // }
-
-    // public function add(array $item): void
-    // {
-    //     // Check parameters
-    //     if (!isset($item['id'], $item['price'])) {
-    //         throw new ParametersException('Your entry data does\'n contain id and price, you must pass id and price.');
-    //     }
-
-    //     // Get current cart
-    //     $cart = $this->get();
-
-    //     // TODO: handle just in one method
-    //     $cart = $this->amountIncrement($cart, $item);
-
-    //     $this->set($cart);
-    // }
-
-    // public function count(): int
-    // {
-    //     return count($this->get());
-    // }
-
-    // public function remove(int $item_id): void
-    // {
-    //     $cart = $this->get();
-    //     array_splice($cart, array_search($item_id, array_column($cart, 'id')), 1);
-    //     $this->set($cart);
-    // }
-
-    // public function clear(): void
-    // {
-    //     $this->set($this->empty());
-    // }
-
-    /**
-     * @return CartInterface
-     */
-    public function get(): CartInterface
+    public function get(): array
     {
-        return Cart::getCart();
+        return request()->session()->get('cart');
     }
 
     public function add(array $item): void
     {
-        // if (!isset($item['id'], $item['price'])) {
-        //     throw new ParametersException('Your entry data does\'n contain id and price, you must pass id and price.');
-        // }
+        // Check parameters
+        if (! isset($item['id'], $item['price'])) {
+            throw new ParametersException('Your entry data does\'n contain id and price, you must pass id and price.');
+        }
 
-        // $item = new Item($item);
+        // Get current cart
+        $cart = $this->get();
 
-        // // Get current cart
-        // $cart = $this->get();
+        $cart = $this->amountIncrement($cart, $item);
 
-        // $cart = $this->amountIncrement($cart, $item);
-
-        // $this->set($cart);
+        $this->set($cart);
     }
 
-    /**
-     * @param  Item  $item
-     * @param  array  $new_item
-     * @return CartInterface
-     */
-    public function update(ItemInterface $item, array $new_item): CartInterface
+    public function update($item, array $new_item)
     {
     }
 
-    /**
-     * @param  ItemInterface  $item
-     * @param  int  $amount
-     * @return CartInterface
-     */
-    public function updateAmount(Item $item, int $amount): CartInterface
+    public function updateAmount($item, int $amount)
     {
+        $cart = $this->get();
+        $index = array_search($item['id'], array_column($cart, 'id'));
+        $cart[$index] = $this->setAmountAndTotal($cart[$index], $amount);
+        $this->set($cart);
     }
 
-    /**
-     * @param  ItemInterface  $item
-     */
-    public function remove(ItemInterface $item)
+    public function remove($item)
     {
+        $cart = $this->get();
+        array_splice($cart, array_search($item['id'], array_column($cart, 'id')), 1);
+        $this->set($cart);
     }
 
-    /**
-     * @return int
-     */
     public function count(): int
     {
+        return count($this->get());
     }
 
     public function clear(): void
     {
+        $this->set($this->empty());
     }
 
     private function empty(): array
