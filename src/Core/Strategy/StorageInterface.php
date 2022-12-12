@@ -5,8 +5,8 @@ namespace Cartwire\Core\Strategy;
 use Cartwire\Contracts\Cart;
 use Cartwire\Contracts\Item;
 
-interface StorageInterface {
-
+interface StorageInterface
+{
     public function get(): Cart;
 
     public function add(array $item): void;
@@ -20,6 +20,4 @@ interface StorageInterface {
     public function count(): int;
 
     public function clear(): void;
-
-
 }

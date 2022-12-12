@@ -2,4 +2,6 @@
 
 namespace Cartwire\Contracts;
 
-interface Item {}
+interface Item
+{
+}

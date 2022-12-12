@@ -2,9 +2,9 @@
 
 namespace Cartwire\Http\Livewire;
 
-use Livewire\Component;
 use Cartwire\Core\Enums\TableColumnStatus;
 use Cartwire\Facades\Cartwire;
+use Livewire\Component;
 
 class CartPage extends Component
 {

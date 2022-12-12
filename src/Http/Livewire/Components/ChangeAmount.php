@@ -2,8 +2,8 @@
 
 namespace Cartwire\Http\Livewire\Components;
 
-use Livewire\Component;
 use Cartwire\Facades\Cartwire;
+use Livewire\Component;
 
 class ChangeAmount extends Component
 {

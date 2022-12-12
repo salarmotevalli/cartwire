@@ -3,13 +3,14 @@
 namespace Cartwire\Storage;
 
 use Cartwire\Contracts\Cart as CartInterface;
-use Cartwire\Contracts\Item;
+use Cartwire\Contracts\Item as ItemInterface;
+use Cartwire\Core\Cart;
+use Cartwire\Core\Item;
 use Cartwire\Core\Strategy\StorageInterface;
 use Cartwire\Exceptions\ParametersException;
 
 class Session implements StorageInterface
 {
-
     // public function __construct()
     // {
     //     if ($this->get() === null) {
@@ -68,40 +69,37 @@ class Session implements StorageInterface
      */
     public function get(): CartInterface
     {
-    
+        return Cart::getCart();
     }
 
-    /**
-     */
     public function add(array $item): void
     {
-        if (!isset($item['id'], $item['price'])) {
-            throw new ParametersException('Your entry data does\'n contain id and price, you must pass id and price.');
-        }
+        // if (!isset($item['id'], $item['price'])) {
+        //     throw new ParametersException('Your entry data does\'n contain id and price, you must pass id and price.');
+        // }
 
-        $item = new Item($item);
-        // Get current cart
-        $cart = $this->get();
+        // $item = new Item($item);
 
-        $cart = $this->amountIncrement($cart, $item);
+        // // Get current cart
+        // $cart = $this->get();
 
-        $this->set($cart);
+        // $cart = $this->amountIncrement($cart, $item);
+
+        // $this->set($cart);
     }
 
     /**
-     *
-     * @param Item $item
-     * @param array $new_item
+     * @param  Item  $item
+     * @param  array  $new_item
      * @return CartInterface
      */
-    public function update(Item $item, array $new_item): CartInterface
+    public function update(ItemInterface $item, array $new_item): CartInterface
     {
     }
 
     /**
-     *
-     * @param Item $item
-     * @param int $amount
+     * @param  ItemInterface  $item
+     * @param  int  $amount
      * @return CartInterface
      */
     public function updateAmount(Item $item, int $amount): CartInterface
@@ -109,10 +107,9 @@ class Session implements StorageInterface
     }
 
     /**
-     *
-     * @param Item $item
+     * @param  ItemInterface  $item
      */
-    public function remove(Item $item)
+    public function remove(ItemInterface $item)
     {
     }
 
@@ -123,8 +120,6 @@ class Session implements StorageInterface
     {
     }
 
-    /**
-     */
     public function clear(): void
     {
     }
@@ -149,7 +144,6 @@ class Session implements StorageInterface
         } else {
             $cart[] = $this->setAmountAndTotal($item, 1);
         }
-
 
         return $cart;
     }
