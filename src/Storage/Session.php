@@ -35,11 +35,11 @@ class Session implements StorageInterface
         $this->set($cart);
     }
 
-    public function update($item, array $new_item)
+    public function update(int $item, array $new_item)
     {
     }
 
-    public function updateAmount($item_id, int $amount)
+    public function updateAmount(int $item_id, int $amount)
     {
         $cart = $this->get();
         $index = array_search($item_id, array_column($cart, 'id'));
@@ -47,7 +47,7 @@ class Session implements StorageInterface
         $this->set($cart);
     }
 
-    public function remove($item_id)
+    public function remove(int $item_id)
     {
         $cart = $this->get();
         array_splice($cart, array_search($item_id, array_column($cart, 'id')), 1);
@@ -71,7 +71,7 @@ class Session implements StorageInterface
 
     private function set($cart): void
     {
-        request()->session()->put('cart', $cart);
+        request()->session()->put('cartwire', $cart);
     }
 
     private function amountIncrement(array $cart, array $item): array

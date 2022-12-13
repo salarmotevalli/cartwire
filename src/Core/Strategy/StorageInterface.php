@@ -8,11 +8,11 @@ interface StorageInterface
 
     public function add(array $item): void;
 
-    public function update($item, array $new_item);
+    public function update(int $item_id, array $new_item);
 
-    public function updateAmount($item, int $amount);
+    public function updateAmount(int $item_id, int $amount);
 
-    public function remove($item);
+    public function remove(int $item_id);
 
     public function count(): int;
 
