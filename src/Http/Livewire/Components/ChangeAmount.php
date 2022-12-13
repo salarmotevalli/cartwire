@@ -11,6 +11,9 @@ class ChangeAmount extends Component
 
     public $item_amount;
 
+    /**
+     * @return void
+     */
     public function updatedItemAmount()
     {
         // TODO: test
@@ -22,6 +25,9 @@ class ChangeAmount extends Component
         }
     }
 
+    /**
+     * @return void
+     */
     public function deleteItem(): void
     {
         Cartwire::remove($this->item_id);

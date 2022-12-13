@@ -8,6 +8,9 @@ class AddToCart extends \Livewire\Component
 {
     public array $data;
 
+    /**
+     * @return void
+     */
     public function add()
     {
         Cartwire::add($this->data);

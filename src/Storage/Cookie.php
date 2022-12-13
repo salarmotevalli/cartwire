@@ -19,7 +19,10 @@ class Cookie implements StorageInterface
         }
     }
 
-    public function get()
+    /**
+     * @return mixed
+     */
+    public function get(): mixed
     {
         $cookie = CookieFacade::get($this->storeKey);
 
@@ -29,6 +32,12 @@ class Cookie implements StorageInterface
             : [];
     }
 
+    /**
+     * @param  array  $item
+     * @return void
+     *
+     * @throws ParametersException
+     */
     public function add(array $item): void
     {
         // Check parameters
@@ -48,6 +57,11 @@ class Cookie implements StorageInterface
     {
     }
 
+    /**
+     * @param  int  $item_id
+     * @param  int  $amount
+     * @return void
+     */
     public function updateAmount(int $item_id, int $amount)
     {
         $cart = $this->get();
@@ -56,6 +70,10 @@ class Cookie implements StorageInterface
         $this->set($cart);
     }
 
+    /**
+     * @param  int  $item_id
+     * @return void
+     */
     public function remove(int $item_id)
     {
         $cart = $this->get();
@@ -63,26 +81,44 @@ class Cookie implements StorageInterface
         $this->set($cart);
     }
 
+    /**
+     * @return int
+     */
     public function count(): int
     {
         return count($this->get());
     }
 
+    /**
+     * @return void
+     */
     public function clear(): void
     {
         $this->set($this->empty());
     }
 
+    /**
+     * @return array
+     */
     private function empty(): array
     {
         return [];
     }
 
+    /**
+     * @param $cart
+     * @return void
+     */
     private function set($cart): void
     {
         CookieFacade::queue($this->storeKey, serialize($cart));
     }
 
+    /**
+     * @param  array  $cart
+     * @param  array  $item
+     * @return array
+     */
     private function amountIncrement(array $cart, array $item): array
     {
         // Check id exist
@@ -97,6 +133,11 @@ class Cookie implements StorageInterface
         return $cart;
     }
 
+    /**
+     * @param  array  $item
+     * @param $amount
+     * @return array
+     */
     private function setAmountAndTotal(array $item, $amount): array
     {
         $item['amount'] = $amount;

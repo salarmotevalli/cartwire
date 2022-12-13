@@ -22,12 +22,18 @@ class CartPage extends Component
         ];
     }
 
+    /**
+     * @return void
+     */
     public function getCart(): void
     {
         $this->items = Cartwire::get();
     }
 
-    public function clearCart()
+    /**
+     * @return void
+     */
+    public function clearCart(): void
     {
         Cartwire::clear();
         $this->mount();

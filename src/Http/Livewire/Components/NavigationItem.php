@@ -18,6 +18,9 @@ class NavigationItem extends Component
         'itemChanged' => 'updateCartTotal',
     ];
 
+    /**
+     * @return void
+     */
     public function updateCartTotal(): void
     {
         $this->count = Cartwire::count();

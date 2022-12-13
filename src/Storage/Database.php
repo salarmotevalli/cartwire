@@ -14,11 +14,20 @@ class Database implements StorageInterface
         }
     }
 
-    public function get()
+    /**
+     * @return mixed
+     */
+    public function get(): mixed
     {
         return request()->session()->get('cart');
     }
 
+    /**
+     * @param  array  $item
+     * @return void
+     *
+     * @throws ParametersException
+     */
     public function add(array $item): void
     {
         // Check parameters
@@ -34,10 +43,20 @@ class Database implements StorageInterface
         $this->set($cart);
     }
 
+    /**
+     * @param  int  $item
+     * @param  array  $new_item
+     * @return void
+     */
     public function update(int $item, array $new_item)
     {
     }
 
+    /**
+     * @param  int  $item_id
+     * @param  int  $amount
+     * @return void
+     */
     public function updateAmount(int $item_id, int $amount)
     {
         $cart = $this->get();
@@ -46,6 +65,10 @@ class Database implements StorageInterface
         $this->set($cart);
     }
 
+    /**
+     * @param  int  $item_id
+     * @return void
+     */
     public function remove(int $item_id)
     {
         $cart = $this->get();
@@ -53,26 +76,44 @@ class Database implements StorageInterface
         $this->set($cart);
     }
 
+    /**
+     * @return int
+     */
     public function count(): int
     {
         return count($this->get());
     }
 
+    /**
+     * @return void
+     */
     public function clear(): void
     {
         $this->set($this->empty());
     }
 
+    /**
+     * @return array
+     */
     private function empty(): array
     {
         return [];
     }
 
+    /**
+     * @param $cart
+     * @return void
+     */
     private function set($cart): void
     {
         request()->session()->put('cartwire', $cart);
     }
 
+    /**
+     * @param  array  $cart
+     * @param  array  $item
+     * @return array
+     */
     private function amountIncrement(array $cart, array $item): array
     {
         // Check id exist
@@ -87,6 +128,11 @@ class Database implements StorageInterface
         return $cart;
     }
 
+    /**
+     * @param  array  $item
+     * @param $amount
+     * @return array
+     */
     private function setAmountAndTotal(array $item, $amount): array
     {
         $item['amount'] = $amount;
