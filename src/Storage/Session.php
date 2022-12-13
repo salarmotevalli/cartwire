@@ -8,8 +8,13 @@ use Cartwire\Exceptions\ParametersException;
 
 class Session implements StorageInterface
 {
+
+    private readonly string $storeKey;
+
     public function __construct()
     {
+        $this->storeKey = config('cartwire.store-key');
+
         if ($this->get() == null) {
             $this->set($this->empty());
         }
@@ -17,7 +22,7 @@ class Session implements StorageInterface
 
     public function get()
     {
-        return request()->session()->get('cart');
+        return request()->session()->get($this->storeKey);
     }
 
     public function add(array $item): void
@@ -71,7 +76,7 @@ class Session implements StorageInterface
 
     private function set($cart): void
     {
-        request()->session()->put('cartwire', $cart);
+        request()->session()->put($this->storeKey, $cart);
     }
 
     private function amountIncrement(array $cart, array $item): array

@@ -10,10 +10,9 @@ return [
 
     'cart-page-route' => 'cart',
 
-    // TODO: it have to delete
-    'model' => \App\Models\User::class,
+    'store-key' => 'cartwire',
 
-    'driver' => Cartwire\Storage\Session::class, // database, cookie, session
+    'driver' => Cartwire\Storage\Cooki::class, // database, cookie, session
 
     'table-columns' => [
         'name' => TableColumnStatus::REQUIRED->value,
