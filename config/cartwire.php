@@ -12,7 +12,7 @@ return [
 
     'store-key' => 'cartwire',
 
-    'driver' => Cartwire\Storage\Cooki::class, // database, cookie, session
+    'driver' => Cartwire\Storage\Cookie::class, // database, cookie, session
 
     'table-columns' => [
         'name' => TableColumnStatus::REQUIRED->value,

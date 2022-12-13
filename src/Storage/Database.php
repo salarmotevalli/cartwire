@@ -5,7 +5,7 @@ namespace Cartwire\Storage;
 use Cartwire\Core\Strategy\StorageInterface;
 use Cartwire\Exceptions\ParametersException;
 
-class Database implements StorageInterface 
+class Database implements StorageInterface
 {
     public function __construct()
     {

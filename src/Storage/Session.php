@@ -2,13 +2,11 @@
 
 namespace Cartwire\Storage;
 
-use Cartwire\Core\Cart;
 use Cartwire\Core\Strategy\StorageInterface;
 use Cartwire\Exceptions\ParametersException;
 
 class Session implements StorageInterface
 {
-
     private readonly string $storeKey;
 
     public function __construct()
