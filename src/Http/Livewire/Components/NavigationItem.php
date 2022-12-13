@@ -11,7 +11,7 @@ class NavigationItem extends Component
 
     public function mount(): void
     {
-        $this->count = count(Cartwire::get());
+        $this->count = Cartwire::count();
     }
 
     protected $listeners = [

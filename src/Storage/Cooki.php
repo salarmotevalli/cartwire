@@ -1,9 +1,10 @@
 <?php
 
 namespace Cartwire\Storage;
+
 use Cartwire\Core\Strategy\StorageInterface;
 use Cartwire\Exceptions\ParametersException;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cookie;
 
 class Cooki implements StorageInterface
 {
@@ -21,14 +22,18 @@ class Cooki implements StorageInterface
 
     public function get()
     {
-        $cookie = request()->cookie($this->storeKey);
-        return unserialize($cookie);
+        $cookie = Cookie::get($this->storeKey);
+
+        // cookie need check 
+        return is_array(unserialize($cookie))
+            ? unserialize($cookie)
+            : [];
     }
 
     public function add(array $item): void
     {
         // Check parameters
-        if (! isset($item['id'], $item['price'])) {
+        if (!isset($item['id'], $item['price'])) {
             throw new ParametersException('Your entry data does\'n contain id and price, you must pass id and price.');
         }
 
@@ -61,7 +66,6 @@ class Cooki implements StorageInterface
 
     public function count(): int
     {
-        // dd($this->get());
         return count($this->get());
     }
 
@@ -77,8 +81,7 @@ class Cooki implements StorageInterface
 
     private function set($cart): void
     {
-        $response = new Response($this->storeKey);
-        $response->withCookie(cookie($this->storeKey, serialize($cart), 60 * 24));
+        Cookie::queue($this->storeKey, serialize($cart));
     }
 
     private function amountIncrement(array $cart, array $item): array
@@ -103,4 +106,3 @@ class Cooki implements StorageInterface
         return $item;
     }
 }
-
