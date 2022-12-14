@@ -15,7 +15,8 @@ class NavigationItem extends Component
     }
 
     protected $listeners = [
-        'itemChanged' => 'updateCartTotal',
+        'item_added' => 'updateCartTotal',
+        'item_deleted' => 'updateCartTotal',
     ];
 
     /**

@@ -1,4 +1,5 @@
 <script>
+
     var rows = document.getElementsByClassName('cart-table-row');
 
     let counter = 1;

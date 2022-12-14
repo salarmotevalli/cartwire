@@ -18,7 +18,8 @@ class CartPage extends Component
     protected function getListeners()
     {
         return [
-            'cart_changed' => 'getCart',
+            'item_deleted' => 'getCart',
+            'item_changed' => 'getCart',
         ];
     }
 

@@ -14,6 +14,19 @@ class Cartwire
     }
 
     /**
+     * @param StorageInterface|null $driver
+     * @return StorageInterface
+     */
+    public function driver(StorageInterface $driver = null): StorageInterface
+    {
+        if ($driver != null) {
+            $this->driver = $driver;
+        }
+
+        return $this->driver;
+    }
+
+    /**
      * @return mixed
      */
     public function get(): mixed

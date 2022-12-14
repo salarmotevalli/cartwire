@@ -14,7 +14,11 @@ class AddToCart extends \Livewire\Component
     public function add()
     {
         Cartwire::add($this->data);
-        $this->emit('itemChanged');
+        $this->emit('item_added');
+
+        if (config('cartwire.notification'))
+            $this->dispatchBrowserEvent('item_deleted', ['message' => 'fuck the world']);
+
     }
 
     public function render()
