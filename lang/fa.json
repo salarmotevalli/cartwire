@@ -2,5 +2,7 @@
     "total": "مجموع",
     "add to cart": "اضافه کردن به سبد خرید",
     "Cart": "سبد خرید",
+    "Item amount changed": "تعداد محصول تغییر یافت.\n تعداد: :amount",
+    "Item deleted": "محصول از سبد خرید حذف شد",
     "clear": "پاک کردن"
 }

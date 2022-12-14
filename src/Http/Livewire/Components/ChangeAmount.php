@@ -22,10 +22,10 @@ class ChangeAmount extends Component
             $this->emit('item_changed');
 
             if (config('cartwire.notification'))
-                $this->dispatchBrowserEvent('item_deleted', ['message' => 'fuck the world']);
+                $this->dispatchBrowserEvent('cartwire-toast', ['message' => __('Item amount changed', ['amount' => $this->item_amount])]);
 
         } else {
-            // TODO: send notif for deleting | test
+            // TODO: send notife for deleting | test
         }
     }
 
@@ -35,9 +35,10 @@ class ChangeAmount extends Component
     public function deleteItem(): void
     {
         Cartwire::remove($this->item_id);
+        $this->emit('item_deleted');
 
         if (config('cartwire.notification'))
-            $this->emit('item_deleted');
+            $this->dispatchBrowserEvent('cartwire-toast', ['message' => __('Item deleted')]);
     }
 
     public function render()

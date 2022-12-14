@@ -1,6 +1,6 @@
 <script>
 
-    window.addEventListener('item_deleted', event => {
+    window.addEventListener('cartwire-toast', event => {
 
         Toastify({
             text: event.detail.message,

@@ -2,5 +2,8 @@
     "total": "Total",
     "add to cart": "Add to cart",
     "cart": "Cart",
-    "clear": "Clear"
+    "clear": "Clear",
+    "Item deleted": "Item deleted from the cart",
+    "Item amount changed": "Item amount chadddnged.\n Item amount: :amount",
+    "Item added": "Item added to cart. \n Item amount: :amount"
 }

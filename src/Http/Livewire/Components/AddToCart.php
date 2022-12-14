@@ -17,7 +17,7 @@ class AddToCart extends \Livewire\Component
         $this->emit('item_added');
 
         if (config('cartwire.notification'))
-            $this->dispatchBrowserEvent('item_deleted', ['message' => 'fuck the world']);
+            $this->dispatchBrowserEvent('cartwire-toast', ['message' => __('Item added')]);
 
     }
 
